@@ -11,3 +11,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore Bundler vendored files
+vendor/bundle
+
+# Ignore pre-compiled assets
+public/assets

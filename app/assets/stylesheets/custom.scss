@@ -1,2 +1,27 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+div#application-header {
+  color: white;
+  background-color: #0088ce;
+}
+
+div#application-header .navbar-brand {
+  color: white;
+  background: none;
+  overflow: visible;
+  text-indent: 0;
+}
+
+#application-footer {
+  color: white;
+  background-color: #0088CE;
+}
+
+section#application-footer a {
+  color: white;
+}
+
+.list-horizontal {
+    padding-left: 0;
+}
