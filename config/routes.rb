@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'shibboleth_login#home'
 
-#  get 'shibboleth_login/initiator'
+  get 'initiate/:org' => 'shibboleth_login#initiator'
+
+  get 'callback' => 'shibboleth_login#callback'
 
 #  get 'shibboleth_login/callback'
 
