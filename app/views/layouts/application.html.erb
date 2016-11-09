@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title><%= yield(:title) %> | Big Ten Academic Alliance Reciprocal Borrowing</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%= yield %>
+    <%= render 'layouts/header' %>
+    
+    <%= yield %>
 
-</body>
+    <%= render 'layouts/footer' %>
+  </body>
 </html>

@@ -10,5 +10,7 @@ class ShibbolethLoginController < ApplicationController
   end
 
   def callback
+    @env = request.env
+    @params = request.params
   end
 end

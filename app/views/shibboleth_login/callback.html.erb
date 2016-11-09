@@ -1,2 +1,17 @@
-<h1>ShibbolethLogin#callback</h1>
-<p>Find me in app/views/shibboleth_login/callback.html.erb</p>
+<h2>User Authentication Successful</h2>
+
+<h3>Env:</h3>
+
+<ul>
+  <% @env.each do |key, value| %>
+    <li><%= key %>: <%= value %></li> 
+  <% end %>
+</ul>
+
+<h3>Params:</h3>
+
+<ul>
+  <% @params.each do |key, value| %>
+    <li><%= key %>: <%= value %></li> 
+  <% end %>
+</ul>
