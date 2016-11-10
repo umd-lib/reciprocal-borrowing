@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    ansi (1.5.0)
     arel (6.0.3)
     ast (2.3.0)
     autoprefixer-rails (6.5.2)
@@ -78,6 +79,13 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
+    minitest-ci (3.0.3)
+      minitest (~> 5.0, >= 5.0.6)
+    minitest-reporters (1.1.12)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     multi_json (1.12.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
@@ -169,6 +177,8 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
+  minitest-ci (~> 3.0.3)
+  minitest-reporters (~> 1.1.8)
   rails (= 4.2.6)
   rubocop (~> 0.39.0)
   rubocop-checkstyle_formatter (~> 0.2.0)
