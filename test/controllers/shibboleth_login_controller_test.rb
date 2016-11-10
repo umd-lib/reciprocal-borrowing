@@ -7,8 +7,8 @@ class ShibbolethLoginControllerTest < ActionController::TestCase
   end
 
   test 'should get initiator' do
-    get :initiator
-    assert_response :success
+    get :initiator, org: 'umd'
+    assert_response :redirect
   end
 
   test 'should get callback' do
