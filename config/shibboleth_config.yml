@@ -1,0 +1,190 @@
+# This YAML file contains Shibboleth configuration information for the
+# production, development, and test Rails environments.
+#
+# The Rails application will need to be started to pick up any modifications
+# to this file.
+
+# Production Environment Configuration
+production:
+  # The "organizations" map contains information for each organization available
+  # to the application.
+  #
+  # Each entry in the "organizations" map MUST adhere to the following form:
+  #
+  #   <org_code>:       
+  #     code: <org_code>
+  #     name: <human-readable name of the organization>
+  #     idp_entity_id: <entityId for the organization's IDP>
+  #     display_order: <number used to sort entries>
+  #
+  # The <org_code> must be unique, and the "code" field of the entry must
+  # match the <org_code> of the entry.
+  #
+  # The "idp_entity_id" should contain the entityID of the organization's IDP.
+  # One source of this information is:
+  #
+  #    https://www.incommon.org/federation/info/all-entities.html
+  #
+  # Select the organzation, then select "more technical information" link in
+  # the dialog to see the entityID.
+  #
+  # The "display_order" number is only used to determine the order in which
+  # the entries are displayed in a list to the user.
+  #
+  # YAML anchors (&id_<org_code>) are used to facilitate reuse the entries
+  # in the "development" and "test" environments.
+  organizations: &id_organizations
+    illinois: &id_illinois
+      code: 'illinois'
+      name: 'University of Illinois'
+      idp_entity_id: 'http://sts.uidaho.edu/adfs/services/trust'
+      display_order: 1
+      
+    indiana: &id_indiana
+      code: 'indiana'
+      name: 'Indiana University'
+      idp_entity_id: 'urn:mace:incommon:iu.edu'
+      display_order: 2
+    
+    iowa: &id_iowa
+      code: 'iowa'
+      name: 'University of Iowa'
+      idp_entity_id: 'urn:mace:incommon:uiowa.edu'
+      display_order: 3
+    
+    maryland: &id_maryland
+      code: 'maryland'
+      name: 'University of Maryland'
+      idp_entity_id: 'urn:mace:incommon:umd.edu'
+      display_order: 4
+    
+    university_of_michigan: &id_university_of_michigan
+      code: 'university_of_michigan'
+      name: 'University of Michigan'
+      idp_entity_id: 'https://shibboleth.umich.edu/idp/shibboleth'
+      display_order: 5
+    
+    michigan_state: &id_michigan_state
+      code: 'michigan_state'
+      name: 'Michigan State University'
+      idp_entity_id: 'urn:mace:incommon:msu.edu'
+      display_order: 6
+    
+    minnesota: &id_minnesota
+      code: 'minnesota'
+      name: 'University of Minnesota'
+      idp_entity_id: 'urn:mace:incommon:umn.edu'
+      display_order: 7
+    
+    nebraska: &id_nebraska
+      code: 'nebraska'
+      name: 'University of Nebraska-Lincoln'
+      idp_entity_id: 'https://shib.unl.edu/idp/shibboleth'
+      display_order: 8
+    
+    northwestern: &id_northwestern
+      code: 'northwestern'
+      name: 'Northwestern University'
+      idp_entity_id: 'urn:mace:incommon:northwestern.edu'
+      display_order: 9
+    
+    ohio: &id_ohio
+      code: 'ohio'
+      name: 'Ohio State University'
+      idp_entity_id: 'urn:mace:incommon:osu.edu'
+      display_order: 10
+    
+    pennsylvania: &id_pennsylvania
+      code: 'pennsylvania'
+      name: 'Pennsylvania State University'
+      idp_entity_id: 'urn:mace:incommon:psu.edu'
+      display_order: 11
+    
+    purdue: &id_purdue
+      code: 'purdue'
+      name: 'Purdue University'
+      idp_entity_id: 'https://idp.purdue.edu/idp/shibboleth'
+      display_order: 12
+    
+    rutgers: &id_rutgers
+      code: 'rutgers'
+      name: 'Rutgers University'
+      idp_entity_id: 'urn:mace:incommon:rutgers.edu'
+      display_order: 13
+    
+    wisconsin: &id_wisconsin
+      code: 'wisconsin'
+      name: 'University of Wisconsin-Madison'
+      idp_entity_id: 'https://login.wisc.edu/idp/shibboleth'
+      display_order: 14
+
+# Development Environment Configuration
+#
+# YAML references (*id_<org_code>) are used to reuse information from the
+# "production" environment, with "<<:" used to override the "idp_entity_id"
+# field value.
+#
+# All idp_entity_id entries point to the IdP of the Vagrant development
+# environment. See https://github.com/umd-lib/reciprocal-borrowing-vagrant
+development:
+  organizations: &id_development_organization
+    illinois:
+      <<: *id_illinois
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+
+    indiana:
+      <<: *id_indiana
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+
+    iowa:
+      <<: *id_iowa
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    maryland:
+      <<: *id_maryland
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    university_of_michigan:
+      <<: *id_university_of_michigan
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    michigan_state:
+      <<: *id_michigan_state
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    minnesota:
+      <<: *id_minnesota
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    nebraska:
+      <<: *id_nebraska
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    northwestern:
+      <<: *id_northwestern
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    ohio:
+      <<: *id_ohio
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    pennsylvania:
+      <<: *id_pennsylvania
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    purdue:
+      <<: *id_purdue
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    rutgers:
+      <<: *id_rutgers
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+    
+    wisconsin:
+      <<: *id_wisconsin
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+
+# Test Environment Configuration
+test:
+  organizations:
+    <<: *id_development_organization
