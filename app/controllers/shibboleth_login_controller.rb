@@ -16,6 +16,9 @@ class ShibbolethLoginController < ApplicationController
       url_encoded_idp_entity_id = ERB::Util.url_encode(idp_entity_id)
       url_with_callback = "#{sp_login_url}?entityID=#{url_encoded_idp_entity_id}&target=#{callback_url}"
       redirect_to url_with_callback
+    else
+      # Was not given a valid org_code, treat as 404 error
+      redirect_to not_found_url
     end
   end
 

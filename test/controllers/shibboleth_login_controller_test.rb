@@ -33,6 +33,11 @@ class ShibbolethLoginControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  test 'initiator with invalid org code should show 404 error page' do
+    get :initiator, org_code: 'org_does_not_exist'
+    assert_redirected_to controller: 'errors', action: 'not_found'
+  end
+
   test 'should get callback' do
     get :callback
     assert_response :success

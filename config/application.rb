@@ -30,5 +30,8 @@ module ReciprocalBorrowing
     # config.i18n.default_locale = :de
     
     config.shibboleth_config = config_for(:shibboleth_config)
+    
+    # Enable dynamic error pages
+    config.exceptions_app = self.routes
   end
 end

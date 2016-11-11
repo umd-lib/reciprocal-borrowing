@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   get 'callback' => 'shibboleth_login#callback'
 
+  # Reconfigure error routes to point to dynamic error pages
+  match '/404', to: 'errors#not_found', via: :all, as: :not_found
+  match '/500', to: 'errors#internal_server_error', via: :all, as: :server_error
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
