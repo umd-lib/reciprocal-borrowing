@@ -24,3 +24,6 @@ test/reports
 # Ignore .env .env.production
 .env
 .env.production
+
+# Ignore simplecov output
+coverage
