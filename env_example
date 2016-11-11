@@ -1,0 +1,20 @@
+# Example .env file
+# Make a copy of this file named ".env" and fill out the properties
+# Note: The .env file should _not_ be checked in to Git!
+
+# File containing server-specific Rails environment variables.
+# Do not check into Git!
+
+# --- config/secrets.yml
+# Secret key used to verify signed cookies
+SECRET_KEY_BASE=
+
+# The following entries are optional:
+
+# The login URL of the Shibboleth Service Provider (SP).
+# Default is "/Shibboleth.sso/Login"
+# SP_LOGIN_URL=https://sp.example.com/Shibboleth.sso/Login
+
+# The URL to successful authentications should return to.
+# Default is "/callback"
+# CALLBACK_URL=https://sp.example.com/callback

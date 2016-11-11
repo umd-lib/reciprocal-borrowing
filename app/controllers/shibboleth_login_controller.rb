@@ -7,8 +7,8 @@ class ShibbolethLoginController < ApplicationController
   def initiator # rubocop:disable Metrics/MethodLength
     org_code = params['org_code']
     organizations = Rails.configuration.shibboleth_config['organizations']
-    sp_login_url = 'https://192.168.33.20/Shibboleth.sso/Login'
-    callback_url = 'https://192.168.33.20/callback'
+    sp_login_url = ENV['SP_LOGIN_URL'] || '/Shibboleth.sso/Login'
+    callback_url = ENV['CALLBACK_URL'] || '/callback'
 
     if organizations.key?(org_code)
       org = organizations[org_code]
