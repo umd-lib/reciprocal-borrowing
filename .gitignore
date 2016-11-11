@@ -20,3 +20,7 @@ public/assets
 
 # Ignore minitest-ci reports
 test/reports
+
+# Ignore .env .env.production
+.env
+.env.production
