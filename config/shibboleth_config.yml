@@ -1,7 +1,7 @@
 # This YAML file contains Shibboleth configuration information for the
 # production, development, and test Rails environments.
 #
-# The Rails application will need to be started to pick up any modifications
+# The Rails application will need to be restarted to pick up any modifications
 # to this file.
 
 # Production Environment Configuration
