@@ -37,3 +37,7 @@ For a "production" environment, the shibboleth_config.yml file has been pre-popu
 The application uses the "dotenv" gem to configure the production environment. The gem expects a ".env" file in the root directory to contain the environment variables that are provided to Ruby. A sample "env_example" file has been provided to assist with this process. Simply copy the "env_example" file to ".env" and fill out the parameters as appropriate.
 
 The configured .env file should not be checked into the Git repository, as it contains credential information.
+
+## License
+
+See the [LICENSE](LICENSE.md) file for license rights and limitations (Apache 2.0).
