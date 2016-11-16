@@ -8,7 +8,7 @@ between members of the [Big Ten Academic Alliance](https://www.btaa.org/).
 
 This application must be added to a server acting as a Shibboleth Service
 Provider (SP). In order to be used in a production environment, the SP
-must be registered with InCommon ([https://www.incommon.org/](https://www.incommon.org/)).
+must be registered with [InCommon](https://www.incommon.org/)).
 
 For local development, this application can be used in conjunction with the Vagrant-based Shibboleth Identity Provider (IdP) and SP provided in the [umd-lib/reciprocal-borrowing-vagrant](https://github.com/umd-lib/reciprocal-borrowing-vagrant) GitHub repository. Refer to the README.md file in that repository for setup instructions.
 
