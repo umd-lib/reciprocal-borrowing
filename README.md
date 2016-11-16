@@ -1,8 +1,8 @@
 # reciprocal-borrowing
 
-This Rails application is designed to work with Shibboleth and the InCommon
-Metadata federation to verify patron eligibility for reciprocal borrowing
-between members of the Big Ten Academic Alliance.
+This Rails application is designed to work with Shibboleth and the [InCommon](https://www.incommon.org/)
+identity management federation to verify patron eligibility for [reciprocal borrowing](https://www.btaa.org/projects/library/reciprocal-borrowing/introduction)
+between members of the [Big Ten Academic Alliance](https://www.btaa.org/).
 
 ## Quick Start
 
