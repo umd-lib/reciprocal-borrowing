@@ -32,4 +32,7 @@ class ShibbolethLoginController < ApplicationController
     @principal_name = @env['eduPersonPrincipalName'] || 'N/A'
     @identifier = @env['eduPersonTargetedID'] || 'N/A'
   end
+
+  def hosting
+  end
 end
