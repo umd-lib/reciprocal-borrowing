@@ -1,17 +1,41 @@
-<h2>User Authentication Successful</h2>
+<% provide(:title, "User Attributes") %>
 
-<h3>Env:</h3>
+<table class="table">
+  <tr>
+    <th>Name:</th>
+    <td><%= @name %></td>
+  </tr>
+  <tr>
+    <th>Affiliation:</th>
+    <td><%= @affiliation %></td>
+  </tr>
+  <tr>
+    <th>Principal Name:</th>
+    <td><%= @principal_name %></td>
+  </tr>
+  <tr>
+    <th>Identifier:</th>
+    <td><%= @identifier %></td>
+  </tr>
+</table>
 
-<ul>
-  <% @env.each do |key, value| %>
-    <li><%= key %>: <%= value %></li> 
-  <% end %>
-</ul>
+<% if Rails.env.development? %>
 
-<h3>Params:</h3>
+  <h2>Debugging information (development only)</h2>
+  <h3>Envronment</h3>
 
-<ul>
-  <% @params.each do |key, value| %>
-    <li><%= key %>: <%= value %></li> 
-  <% end %>
-</ul>
+  <ul>
+    <% @env.each do |key, value| %>
+      <li><%= key %>: <%= value %></li> 
+    <% end %>
+  </ul>
+
+  <h3>Parameters</h3>
+
+  <ul>
+    <% @params.each do |key, value| %>
+      <li><%= key %>: <%= value %></li> 
+    <% end %>
+  </ul>
+
+<% end %>

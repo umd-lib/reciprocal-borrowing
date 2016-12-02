@@ -25,5 +25,10 @@ class ShibbolethLoginController < ApplicationController
   def callback
     @env = request.env
     @params = request.params
+
+    @name = @env['displayName'] || "#{@env['givenName']} #{@env['sn']}"
+    @affiliation = @env['eduPersonScopedAffiliation'] || 'N/A'
+    @principal_name = @env['eduPersonPrincipalName'] || 'N/A'
+    @identifier = @env['eduPersonTargetedID'] || 'N/A'
   end
 end
