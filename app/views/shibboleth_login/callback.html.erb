@@ -1,41 +1,54 @@
 <% provide(:title, "User Attributes") %>
 
-<table class="table">
-  <tr>
-    <th>Name:</th>
-    <td><%= @name %></td>
-  </tr>
-  <tr>
-    <th>Affiliation:</th>
-    <td><%= @affiliation %></td>
-  </tr>
-  <tr>
-    <th>Principal Name:</th>
-    <td><%= @principal_name %></td>
-  </tr>
-  <tr>
-    <th>Identifier:</th>
-    <td><%= @identifier %></td>
-  </tr>
-</table>
+<div role="main" id="main-container" class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <table class="table attributes">
+          <tr>
+            <th>Name:</th>
+            <td><%= @name %></td>
+          </tr>
+          <tr>
+            <th>Affiliation:</th>
+            <td><%= @affiliation %></td>
+          </tr>
+          <tr>
+            <th>Principal Name:</th>
+            <td><%= @principal_name %></td>
+          </tr>
+          <tr>
+            <th>Identifier:</th>
+            <td><%= @identifier %></td>
+          </tr>
+        </table>
 
-<% if Rails.env.development? %>
+        <% if Rails.env.development? %>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
 
-  <h2>Debugging information (development only)</h2>
-  <h3>Envronment</h3>
+              <h2 class="panel-title">Debugging information (development only)</h2>
+            </div>
+            <div class="panel-body">
+              <h3>Envronment</h3>
 
-  <ul>
-    <% @env.each do |key, value| %>
-      <li><%= key %>: <%= value %></li> 
-    <% end %>
-  </ul>
+              <ul>
+                <% @env.each do |key, value| %>
+                  <li><%= key %>: <%= value %></li> 
+                <% end %>
+              </ul>
 
-  <h3>Parameters</h3>
+              <h3>Parameters</h3>
 
-  <ul>
-    <% @params.each do |key, value| %>
-      <li><%= key %>: <%= value %></li> 
-    <% end %>
-  </ul>
-
-<% end %>
+              <ul>
+                <% @params.each do |key, value| %>
+                  <li><%= key %>: <%= value %></li> 
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
