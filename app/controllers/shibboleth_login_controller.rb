@@ -27,6 +27,7 @@ class ShibbolethLoginController < ApplicationController
     @params = request.params
 
     @name = @env['displayName'] || "#{@env['givenName']} #{@env['sn']}"
+    @name = 'N/A' if @name.strip.empty?
     @affiliation = @env['eduPersonScopedAffiliation'] || 'N/A'
     @principal_name = @env['eduPersonPrincipalName'] || 'N/A'
     @identifier = @env['eduPersonTargetedID'] || 'N/A'
