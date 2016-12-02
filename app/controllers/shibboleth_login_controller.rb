@@ -8,7 +8,7 @@ class ShibbolethLoginController < ApplicationController
     org_code = params['org_code']
     organizations = Rails.configuration.shibboleth_config['organizations']
     sp_login_url = ENV['SP_LOGIN_URL'] || '/Shibboleth.sso/Login'
-    callback_url = ENV['CALLBACK_URL'] || '/callback'
+    callback_url = ENV['CALLBACK_URL'] || '/attributes'
 
     if organizations.key?(org_code)
       org = organizations[org_code]

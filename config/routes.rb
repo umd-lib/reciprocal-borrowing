@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'initiate/:org_code' => 'shibboleth_login#initiator'
 
-  get 'callback' => 'shibboleth_login#callback'
+  get 'attributes' => 'shibboleth_login#callback'
 
   # Reconfigure error routes to point to dynamic error pages
   match '/404', to: 'errors#not_found', via: :all, as: :not_found
