@@ -43,7 +43,7 @@ production:
     illinois: &id_illinois
       code: 'illinois'
       name: 'University of Illinois'
-      idp_entity_id: 'http://sts.uidaho.edu/adfs/services/trust'
+      idp_entity_id: 'urn:mace:incommon:uiuc.edu'
       display_order: 1
       
     indiana: &id_indiana
