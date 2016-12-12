@@ -27,3 +27,6 @@ test/reports
 
 # Ignore simplecov output
 coverage
+
+# Ignore NetBeans workspace
+/nbproject
