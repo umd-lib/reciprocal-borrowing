@@ -22,7 +22,7 @@ class ShibbolethLoginController < ApplicationController
     end
   end
 
-  def callback
+  def callback # rubocop:disable Metrics/AbcSize
     @env = request.env
     @params = request.params
 
@@ -31,6 +31,8 @@ class ShibbolethLoginController < ApplicationController
     @affiliation = @env['eduPersonScopedAffiliation'] || 'N/A'
     @principal_name = @env['eduPersonPrincipalName'] || 'N/A'
     @identifier = @env['eduPersonTargetedID'] || 'N/A'
+
+    TransactionsLogger.info(@identifier)
   end
 
   def hosting
