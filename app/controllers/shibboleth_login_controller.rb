@@ -4,7 +4,7 @@ class ShibbolethLoginController < ApplicationController
     @org_list = organizations.values.sort_by { |v| v['display_order'] }
   end
 
-  def initiator # rubocop:disable Metrics/MethodLength
+  def initiator # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     org_code = params['org_code']
     organizations = Rails.configuration.shibboleth_config['organizations']
     sp_login_url = ENV['SP_LOGIN_URL'] || '/Shibboleth.sso/Login'
