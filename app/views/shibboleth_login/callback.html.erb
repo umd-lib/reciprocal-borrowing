@@ -22,6 +22,16 @@
             <td><%= @identifier %></td>
           </tr>
         </table>
+        
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+               Important!
+          </div>
+          <div class="panel-body">
+            To protect the user's credentials, be sure to
+            <em>exit the browser</em> when done viewing this page.
+          </div>
+        </div>
 
         <% if Rails.env.development? %>
           <div class="panel panel-warning">
@@ -30,7 +40,7 @@
               <h2 class="panel-title">Debugging information (development only)</h2>
             </div>
             <div class="panel-body">
-              <h3>Envronment</h3>
+              <h3>Environment</h3>
 
               <ul>
                 <% @env.each do |key, value| %>
