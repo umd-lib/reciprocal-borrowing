@@ -22,6 +22,19 @@
             <td><%= @identifier %></td>
           </tr>
         </table>
+        
+        <section id="authentication-message">
+          <p>
+            AUTHENTICATION SUCCESSFUL
+          </p>
+          <p>
+            Users eligible for borrowing will see “member@(institution).edu” in
+            the Affiliation category
+          <p>
+          <p>
+            For security purposes please close your browser to exit the system
+          <p>
+        </section>
 
         <% if Rails.env.development? %>
           <div class="panel panel-warning">
@@ -30,7 +43,7 @@
               <h2 class="panel-title">Debugging information (development only)</h2>
             </div>
             <div class="panel-body">
-              <h3>Envronment</h3>
+              <h3>Environment</h3>
 
               <ul>
                 <% @env.each do |key, value| %>
