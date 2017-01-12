@@ -11,3 +11,22 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore Bundler vendored files
+vendor/bundle
+
+# Ignore pre-compiled assets
+public/assets
+
+# Ignore minitest-ci reports
+test/reports
+
+# Ignore .env .env.production
+.env
+.env.production
+
+# Ignore simplecov output
+coverage
+
+# Ignore NetBeans workspace
+/nbproject

@@ -1,0 +1,83 @@
+div#application-header {
+  color: white;
+  background-color: #0088ce;
+}
+div#application-header a {
+    color: #FFFFFF !important;
+    border-top: 1px solid #0088ce;
+}
+div#application-header a:hover {
+    color: #000000 !important;
+}
+div#application-header span.icon-bar {
+    background-color: #ffffff;
+}
+.navbar {
+    margin-bottom: 0;
+}
+#header-navbar .navbar-brand {
+	padding-left:0;
+	font-weight:bold;
+	font-size:36px;
+}
+div#main-container {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+	padding: 0 30px;
+}
+
+div#application-header .navbar-brand {
+  color: white;
+  background: none;
+  overflow: visible;
+  text-indent: 0;
+}
+.list-horizontal {
+    padding-left: 0;
+}
+.list-horizontal li {
+    display: inline-block;
+}
+.list-horizontal li:before {
+    content: '\00a0\2022\00a0\00a0';
+    color: #FFFFFF;
+}
+.list-horizontal li:first-child {
+    width: auto;
+}
+.list-horizontal li:first-child:before {
+    content: none;
+}
+section#footer-app {
+    color: #FFFFFF;
+    padding-bottom: 1rem;
+    background-color: #0088ce;
+}
+section#footer-app a {
+  color: white;
+}
+
+footer {
+    background-color: #cccccc;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+footer a {
+    color: #000000;
+}
+@media (max-width: 479px) {
+	#header-navbar .navbar-brand {
+	padding-left:0;
+	font-weight:bold;
+	font-size:20px;
+	}
+}
+.attributes th {
+    width: 10em;
+}
+
+section#authentication-message {
+  color: #048AD1;
+  text-align: center;
+  font-size: 140%;
+}

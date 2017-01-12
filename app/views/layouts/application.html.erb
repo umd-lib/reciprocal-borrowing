@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>ReciprocalBorrowing</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title><%= yield(:title) %> | Big Ten Academic Alliance Reciprocal Borrowing</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="//www.btaa.org/Images/favicon.ico"/>
+  </head>
+  <body>
+    <%= umd_lib_environment_banner %>
 
-<%= yield %>
+    <%= render 'layouts/header' %>
+    
+    <%= yield %>
 
-</body>
+    <%= render 'layouts/footer' %>
+  </body>
 </html>

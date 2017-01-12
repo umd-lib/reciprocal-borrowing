@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  root 'shibboleth_login#home'
+
+  get 'initiate/:org_code' => 'shibboleth_login#initiator'
+
+  get 'attributes' => 'shibboleth_login#callback'
+
+  get 'hosting' => 'shibboleth_login#hosting'
+
+  # Reconfigure error routes to point to dynamic error pages
+  match '/404', to: 'errors#not_found', via: :all, as: :not_found
+  match '/500', to: 'errors#internal_server_error', via: :all, as: :server_error
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

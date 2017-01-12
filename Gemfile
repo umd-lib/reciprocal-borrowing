@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Add Bootstrap
+gem 'bootstrap-sass', '3.3.6'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -30,6 +31,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# dotenv - For storing production configuration parameters
+gem 'dotenv-rails', '~> 2.1.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -43,3 +47,13 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  gem 'minitest-reporters', '~> 1.1.8'
+  gem 'minitest-ci', '~> 3.0.3'
+
+  # Code analysis tools
+  gem 'rubocop', '~> 0.39.0', require: false
+  gem 'rubocop-checkstyle_formatter', '~> 0.2.0', require: false
+  gem 'simplecov', require: false
+  gem 'simplecov-rcov', require: false
+end
