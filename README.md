@@ -16,13 +16,17 @@ For local development, this application can be used in conjunction with the Vagr
 
 The functionality of this application is extremely straightforward:
 
-1) The home page provides a list of organizations participating in reciprocal borrowing. After selecting a page, the application redirects the browser (via an entityID provided to the Shibboleth SP running on the server) to a Shibboleth IdP for the selected organization.
+1) The home page provides a list of organizations participating in reciprocal borrowing. On this page, the organization doing the lending is selected.
 
-2) The user authenticates via their organizational authentication process.
+2) After selecting the lending organization, a second page is shown with a list of organizations. The authenticating organization (the organization the borrowing patron is a member) is selected. After selecting the organication, the application redirects the browser (via an entityID provided to the Shibboleth SP running on the server) to a Shibboleth IdP for the selected organization.
 
-**Note:** This step takes place entirely outside of this application, so this application never has access to the user's credentials.
+2) The borrowing patron authenticates via their organizational authentication process.
 
-3) After successfully authenticating, the browser is redirected back to this application, which displays a "successful authentication" page.
+**Note:** This step takes place entirely outside of this application, so this application never has access to the patron's credentials.
+
+3) After successfully authenticating, the browser is redirected back to this application, which indicates whether the patron is eligible to borrow.
+
+**Note:** The local development environment (when used in conjunction with the "reciprocal-borrowing-vagrant" as the Shibboleth SP and IdP) *cannot* show that a user is eligible to borrow because the IdP is not configured to pass the "eduPersonScopedAffiliation" back to the application. Conversely, when running on the dev, stage, or production servers, there is no known way to show that a user in ineligible for borrow because the UMD server always seems pass back the expected property.
 
 ## Application Configuration
 
