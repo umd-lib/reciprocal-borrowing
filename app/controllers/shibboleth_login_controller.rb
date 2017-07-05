@@ -4,7 +4,7 @@ class ShibbolethLoginController < ApplicationController
     @org_list = organizations.values.sort_by { |v| v['display_order'] }
   end
 
-  def authenticate
+  def authenticate # rubocop:disable Metrics/AbcSize
     @lending_org_code = params['lending_org_code']
     organizations = Rails.configuration.shibboleth_config['organizations']
 
@@ -12,6 +12,7 @@ class ShibbolethLoginController < ApplicationController
       @org_list = organizations.values.sort_by { |v| v['display_order'] }
       lending_org = organizations[@lending_org_code]
       @lending_org_name = lending_org['name']
+      session[:lending_org_code] = @lending_org_code
     else
       # Was not given a valid org_code, treat as 404 error
       redirect_to not_found_url
@@ -27,6 +28,7 @@ class ShibbolethLoginController < ApplicationController
     if organizations.key?(org_code)
       org = organizations[org_code]
       idp_entity_id = org['idp_entity_id']
+      session[:auth_org_code] = org_code
       url_encoded_idp_entity_id = ERB::Util.url_encode(idp_entity_id)
       url_with_callback = "#{sp_login_url}?entityID=#{url_encoded_idp_entity_id}&target=#{callback_url}"
       redirect_to url_with_callback
@@ -36,7 +38,10 @@ class ShibbolethLoginController < ApplicationController
     end
   end
 
-  def callback # rubocop:disable Metrics/AbcSize
+  def callback # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+    @lending_org_code = session[:lending_org_code]
+    @auth_org_code = session[:auth_org_code]
+
     @env = request.env
     @params = request.params
 
@@ -46,9 +51,22 @@ class ShibbolethLoginController < ApplicationController
     @principal_name = @env['eduPersonPrincipalName'] || 'N/A'
     @identifier = @env['eduPersonTargetedID'] || 'N/A'
 
+    @user_authorized = user_authorized?(@auth_org_code, @affiliation)
+
     TransactionsLogger.info(@identifier)
   end
 
   def hosting
   end
+
+  private
+
+    # Returns true is the user is authorized, false otherwise.
+    #
+    # auth_org_code: The code of the organizaton performing the authorization
+    # affiliation: the eduPersonScopedAffiliation parameter from Shibboleth
+    def user_authorized?(auth_org_code, affiliation)
+      expected_affliation = "member@#{auth_org_code}.edu"
+      affiliation.split(';').include?(expected_affliation)
+    end
 end
