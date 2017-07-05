@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'shibboleth_login#home'
 
-  get 'initiate/:org_code' => 'shibboleth_login#initiator'
+  get 'authenticate/:lending_org_code' => 'shibboleth_login#authenticate', as: :authenticator
+  get 'initiate/:org_code' => 'shibboleth_login#initiator', as: :initiator
 
   get 'attributes' => 'shibboleth_login#callback'
 
