@@ -26,11 +26,11 @@
         <section id="authentication-message">
           <% if @user_authorized %>
             <p class="user-authorized">
-              User is eligible for borrowing based on Affiliation of member@<%= @auth_org_code %>.edu
+              User is eligible for borrowing
             </p>
           <% else %>
             <p class="user-not-authorized">
-              User is <strong>NOT</strong> eligible for borrowing due to missing member@<%= @auth_org_code %>.edu in Affiliation
+              User is <strong>NOT</strong> eligible for borrowing – not recognized as member@<%= @auth_org_code %>.edu
             <p>
           <% end %>
           <p>
