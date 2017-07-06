@@ -85,4 +85,46 @@ class ShibbolethLoginControllerTest < ActionController::TestCase
     get :callback
     assert_response :success
   end
+
+  test 'callback should show eligible for valid eduPersonScopedAffiliation' do
+    session[:lending_org_code] = 'umd'
+    session[:auth_org_code] = 'uiowa'
+    @request.env['eduPersonScopedAffiliation'] = 'member@uiowa.edu'
+
+    get :callback
+
+    assert_response :success
+    assert_select '.user-authorized'
+  end
+
+  test 'callback should show not eligible for invalid eduPersonScopedAffiliation' do
+    # eduPersonScopedAffiliation is nil
+    session[:lending_org_code] = 'umd'
+    session[:auth_org_code] = 'uiowa'
+
+    get :callback
+
+    assert_response :success
+    assert_select '.user-not-authorized'
+
+    # eduPersonScopedAffiliation is N/A
+    session[:lending_org_code] = 'umd'
+    session[:auth_org_code] = 'uiowa'
+    @request.env['eduPersonScopedAffiliation'] = 'N/A'
+
+    get :callback
+
+    assert_response :success
+    assert_select '.user-not-authorized'
+
+    # auth_org code does not match eduPersonScopedAffiliation
+    session[:lending_org_code] = 'umd'
+    session[:auth_org_code] = 'uiowa'
+    @request.env['eduPersonScopedAffiliation'] = 'member@rutgers.edu'
+
+    get :callback
+
+    assert_response :success
+    assert_select '.user-not-authorized'
+  end
 end

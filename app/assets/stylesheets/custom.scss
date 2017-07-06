@@ -89,3 +89,8 @@ section#authentication-message {
 .disabled-link {
     color: gray
 }
+
+.user-not-authorized strong {
+    font-weight: bold;
+    color: red;
+}
