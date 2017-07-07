@@ -41,8 +41,8 @@ production:
       idp_entity_id: 'urn:mace:incommon:uchicago.edu'
       display_order: 0
 
-    uiuc: &id_uiuc
-      code: 'uiuc'
+    illinois: &id_illinois
+      code: 'illinois'
       name: 'University of Illinois'
       idp_entity_id: 'urn:mace:incommon:uiuc.edu'
       display_order: 1
@@ -139,8 +139,8 @@ development:
       <<: *id_uchicago
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
 
-    uiuc:
-      <<: *id_uiuc
+    illinois:
+      <<: *id_illinois
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
 
     iu:
