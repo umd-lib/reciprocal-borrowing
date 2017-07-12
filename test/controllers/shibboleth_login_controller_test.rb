@@ -97,6 +97,17 @@ class ShibbolethLoginControllerTest < ActionController::TestCase
     assert_select '.user-authorized'
   end
 
+  test 'callback should show eligible for valid eduPersonScopedAffiliation, ignoring case' do
+    session[:lending_org_code] = 'umd'
+    session[:auth_org_code] = 'uiowa'
+    @request.env['eduPersonScopedAffiliation'] = 'Member@uiowa.edu'
+
+    get :callback
+
+    assert_response :success
+    assert_select '.user-authorized'
+  end
+
   test 'callback should show not eligible for invalid eduPersonScopedAffiliation' do
     # eduPersonScopedAffiliation is nil
     session[:lending_org_code] = 'umd'
