@@ -73,6 +73,6 @@ class ShibbolethLoginController < ApplicationController
     # affiliation: the eduPersonScopedAffiliation parameter from Shibboleth
     def user_authorized?(auth_org_code, affiliation)
       expected_affliation = "member@#{auth_org_code}.edu"
-      affiliation.split(';').include?(expected_affliation)
+      affiliation.split(';').any? { |a| a.downcase == expected_affliation }
     end
 end
