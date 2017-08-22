@@ -22,15 +22,17 @@
             <td><%= @identifier %></td>
           </tr>
         </table>
-        
+
         <section id="authentication-message">
-          <p>
-            AUTHENTICATION SUCCESSFUL
-          </p>
-          <p>
-            Users eligible for borrowing will see “member@(institution).edu” in
-            the Affiliation category
-          <p>
+          <% if @user_authorized %>
+            <p class="user-authorized">
+              User is eligible for borrowing
+            </p>
+          <% else %>
+            <p class="user-not-authorized">
+              User is <strong>NOT</strong> eligible for borrowing – not recognized as member@<%= @auth_org_code %>.edu
+            <p>
+          <% end %>
           <p>
             For security purposes please close your browser to exit the system
           <p>
@@ -47,7 +49,7 @@
 
               <ul>
                 <% @env.each do |key, value| %>
-                  <li><%= key %>: <%= value %></li> 
+                  <li><%= key %>: <%= value %></li>
                 <% end %>
               </ul>
 
@@ -55,7 +57,7 @@
 
               <ul>
                 <% @params.each do |key, value| %>
-                  <li><%= key %>: <%= value %></li> 
+                  <li><%= key %>: <%= value %></li>
                 <% end %>
               </ul>
             </div>

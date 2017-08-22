@@ -11,14 +11,15 @@ production:
   #
   # Each entry in the "organizations" map MUST adhere to the following form:
   #
-  #   <org_code>:       
+  #   <org_code>:
   #     code: <org_code>
   #     name: <human-readable name of the organization>
   #     idp_entity_id: <entityId for the organization's IDP>
   #     display_order: <number used to sort entries>
   #
   # The <org_code> must be unique, and the "code" field of the entry must
-  # match the <org_code> of the entry.
+  # match the <org_code> of the entry. This will typically be the taken from
+  # the idp_entity_id.
   #
   # The "idp_entity_id" should contain the entityID of the organization's IDP.
   # One source of this information is:
@@ -34,8 +35,8 @@ production:
   # YAML anchors (&id_<org_code>) are used to facilitate reuse the entries
   # in the "development" and "test" environments.
   organizations: &id_organizations
-    chicago: &id_chicago
-      code: 'chicago'
+    uchicago: &id_uchicago
+      code: 'uchicago'
       name: 'University of Chicago'
       idp_entity_id: 'urn:mace:incommon:uchicago.edu'
       display_order: 0
@@ -45,81 +46,81 @@ production:
       name: 'University of Illinois'
       idp_entity_id: 'urn:mace:incommon:uiuc.edu'
       display_order: 1
-      
-    indiana: &id_indiana
-      code: 'indiana'
+
+    iu: &id_iu
+      code: 'iu'
       name: 'Indiana University'
       idp_entity_id: 'urn:mace:incommon:iu.edu'
       display_order: 2
-    
-    iowa: &id_iowa
-      code: 'iowa'
+
+    uiowa: &id_uiowa
+      code: 'uiowa'
       name: 'University of Iowa'
       idp_entity_id: 'urn:mace:incommon:uiowa.edu'
       display_order: 3
-    
-    maryland: &id_maryland
-      code: 'maryland'
+
+    umd: &id_umd
+      code: 'umd'
       name: 'University of Maryland'
       idp_entity_id: 'urn:mace:incommon:umd.edu'
       display_order: 4
-    
-    university_of_michigan: &id_university_of_michigan
-      code: 'university_of_michigan'
+
+    umich: &id_umich
+      code: 'umich'
       name: 'University of Michigan'
       idp_entity_id: 'https://shibboleth.umich.edu/idp/shibboleth'
       display_order: 5
-    
-    michigan_state: &id_michigan_state
-      code: 'michigan_state'
+
+    msu: &id_msu
+      code: 'msu'
       name: 'Michigan State University'
       idp_entity_id: 'urn:mace:incommon:msu.edu'
       display_order: 6
-    
-    minnesota: &id_minnesota
-      code: 'minnesota'
+
+    umn: &id_umn
+      code: 'umn'
       name: 'University of Minnesota'
       idp_entity_id: 'urn:mace:incommon:umn.edu'
       display_order: 7
-    
-    nebraska: &id_nebraska
-      code: 'nebraska'
+
+    unl: &id_unl
+      code: 'unl'
       name: 'University of Nebraska-Lincoln'
       idp_entity_id: 'https://shib.unl.edu/idp/shibboleth'
       display_order: 8
-    
+
     northwestern: &id_northwestern
       code: 'northwestern'
       name: 'Northwestern University'
       idp_entity_id: 'urn:mace:incommon:northwestern.edu'
       display_order: 9
-    
-    ohio: &id_ohio
-      code: 'ohio'
+
+    osu: &id_osu
+      code: 'osu'
       name: 'Ohio State University'
       idp_entity_id: 'urn:mace:incommon:osu.edu'
       display_order: 10
-    
-    pennsylvania: &id_pennsylvania
-      code: 'pennsylvania'
+
+    psu: &id_psu
+      code: 'psu'
       name: 'Pennsylvania State University'
       idp_entity_id: 'urn:mace:incommon:psu.edu'
       display_order: 11
-    
+
     purdue: &id_purdue
       code: 'purdue'
       name: 'Purdue University'
       idp_entity_id: 'https://idp.purdue.edu/idp/shibboleth'
       display_order: 12
-    
+
     rutgers: &id_rutgers
       code: 'rutgers'
       name: 'Rutgers University'
       idp_entity_id: 'urn:mace:incommon:rutgers.edu'
       display_order: 13
-    
-    wisconsin: &id_wisconsin
-      code: 'wisconsin'
+
+    wisc: &id_wisc
+      code: 'wisc'
       name: 'University of Wisconsin-Madison'
       idp_entity_id: 'https://login.wisc.edu/idp/shibboleth'
       display_order: 14
@@ -134,64 +135,64 @@ production:
 # environment. See https://github.com/umd-lib/reciprocal-borrowing-vagrant
 development:
   organizations: &id_development_organization
-    chicago:
-      <<: *id_chicago
+    uchicago:
+      <<: *id_uchicago
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
 
     illinois:
       <<: *id_illinois
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
 
-    indiana:
-      <<: *id_indiana
+    iu:
+      <<: *id_iu
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
 
-    iowa:
-      <<: *id_iowa
+    uiowa:
+      <<: *id_uiowa
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
-    maryland:
-      <<: *id_maryland
+
+    umd:
+      <<: *id_umd
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
-    university_of_michigan:
-      <<: *id_university_of_michigan
+
+    umich:
+      <<: *id_umich
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
-    michigan_state:
-      <<: *id_michigan_state
+
+    msu:
+      <<: *id_msu
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
-    minnesota:
-      <<: *id_minnesota
+
+    umn:
+      <<: *id_umn
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
-    nebraska:
-      <<: *id_nebraska
+
+    unl:
+      <<: *id_unl
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
+
     northwestern:
       <<: *id_northwestern
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
-    ohio:
-      <<: *id_ohio
+
+    osu:
+      <<: *id_osu
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
-    pennsylvania:
-      <<: *id_pennsylvania
+
+    psu:
+      <<: *id_psu
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
+
     purdue:
       <<: *id_purdue
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
+
     rutgers:
       <<: *id_rutgers
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-    
-    wisconsin:
-      <<: *id_wisconsin
+
+    wisc:
+      <<: *id_wisc
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
 
 # Test Environment Configuration

@@ -15,18 +15,15 @@
           their current affiliation by authenticating through use of this
           BTAA Reciprocal Borrowing Application.</p>
 
-          <p>To authenticate, please click on your home institution below
-          and log-in using your institution user ID and password. A
-          successful result will return your name, affiliation, and
-          personal identifier number.</p>
+          <p>Please select the lending institution.</p>
         </div>
 
         <ul id="organization_list">
           <% @org_list.each do |org| %>
-            <% org_code = org['code'] %>
-            <% org_name = org['name'] %>
-            <li id="<%= org_code + "_entry" %>">
-            <a href="/initiate/<%= org_code %>"><%= org_name %></a>
+            <% lending_org_code = org['code'] %>
+            <% lending_org_name = org['name'] %>
+            <li id="<%= lending_org_code + "_entry" %>">
+            <a href="/authenticate/<%= lending_org_code %>"><%= lending_org_name %></a>
             </li>
           <% end %>
         </ul>
