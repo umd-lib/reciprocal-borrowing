@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ShibbolethLoginControllerTest < ActionController::TestCase
+class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disable Metrics/ClassLength
   test 'should get home' do
     get :home
     assert_response :success
