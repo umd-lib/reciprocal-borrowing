@@ -51,6 +51,7 @@ class ShibbolethLoginController < ApplicationController
     @affiliation = @env['eduPersonScopedAffiliation'] || 'N/A'
     @principal_name = @env['eduPersonPrincipalName'] || 'N/A'
     @identifier = @env['eduPersonTargetedID'] || 'N/A'
+    @entitlement = @env['eduPersonEntitlement'] || 'N/A'
 
     @user_authorized = user_authorized?(@auth_org_code, @affiliation)
 
