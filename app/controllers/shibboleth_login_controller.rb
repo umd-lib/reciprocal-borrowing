@@ -48,12 +48,11 @@ class ShibbolethLoginController < ApplicationController
 
     @name = @env['displayName'] || "#{@env['givenName']} #{@env['sn']}"
     @name = 'N/A' if @name.strip.empty?
-    @affiliation = @env['eduPersonScopedAffiliation'] || 'N/A'
     @principal_name = @env['eduPersonPrincipalName'] || 'N/A'
     @identifier = @env['eduPersonTargetedID'] || 'N/A'
     @entitlement = @env['eduPersonEntitlement'] || 'N/A'
 
-    @user_authorized = user_authorized?(@auth_org_code, @affiliation)
+    @user_authorized = user_authorized?(@entitlement)
 
     transaction_entry = "#{@identifier}," \
                         "lending_org_code=#{@lending_org_code || 'N/A'}," \
@@ -70,10 +69,9 @@ class ShibbolethLoginController < ApplicationController
 
     # Returns true is the user is authorized, false otherwise.
     #
-    # auth_org_code: The code of the organizaton performing the authorization
-    # affiliation: the eduPersonScopedAffiliation parameter from Shibboleth
-    def user_authorized?(auth_org_code, affiliation)
-      expected_affliation = "member@#{auth_org_code}.edu"
-      affiliation.split(';').any? { |a| a.downcase == expected_affliation }
+    # entitlement: the eduPersonEntitlement attribute from Shibboleth
+    def user_authorized?(entitlement)
+      expected_entitlement = 'https://borrow.btaa.org/reciprocalborrower'
+      entitlement.split(';').any? { |e| e.downcase == expected_entitlement }
     end
 end

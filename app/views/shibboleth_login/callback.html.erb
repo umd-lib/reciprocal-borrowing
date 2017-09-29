@@ -10,10 +10,6 @@
             <td><%= @name %></td>
           </tr>
           <tr>
-            <th>Affiliation:</th>
-            <td><%= @affiliation %></td>
-          </tr>
-          <tr>
             <th>Entitlement:</th>
             <td><%= @entitlement %></td>
           </tr>
@@ -34,7 +30,7 @@
             </p>
           <% else %>
             <p class="user-not-authorized">
-              User is <strong>NOT</strong> eligible for borrowing – not recognized as member@<%= @auth_org_code %>.edu
+              User is <strong>NOT</strong> eligible for borrowing due to missing "https://borrow.btaa.org/reciprocalborrower" in the eduPersonEntitlement.
             <p>
           <% end %>
           <p>
