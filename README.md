@@ -26,7 +26,7 @@ The functionality of this application is extremely straightforward:
 
 3) After successfully authenticating, the browser is redirected back to this application, which indicates whether the patron is eligible to borrow.
 
-**Note:** The local development environment (when used in conjunction with the "reciprocal-borrowing-vagrant" as the Shibboleth SP and IdP) *cannot* show that a user is eligible to borrow because the IdP is not configured to pass the "eduPersonScopedAffiliation" back to the application. Conversely, when running on the dev, stage, or production servers, there is no known way to show that a user in ineligible for borrow because the UMD server always seems pass back the expected property.
+**Note:** The local development environment (when used in conjunction with the "reciprocal-borrowing-vagrant" as the Shibboleth SP and IdP) *cannot* show that a user is eligible to borrow because the IdP is not currently configured to pass the correct "eduPersonEntitlement" attribute back to the application. Conversely, when running on the dev, stage, or production servers, there is no known way to show that a user in ineligible for borrow because the UMD server always seems pass back the expected property.
 
 ## Application Configuration
 
