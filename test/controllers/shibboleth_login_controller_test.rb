@@ -86,10 +86,10 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     assert_response :success
   end
 
-  test 'callback should show eligible for valid eduPersonScopedAffiliation' do
+  test 'callback should show eligible for valid eduPersonEntitlement' do
     session[:lending_org_code] = 'umd'
     session[:auth_org_code] = 'uiowa'
-    @request.env['eduPersonScopedAffiliation'] = 'member@uiowa.edu'
+    @request.env['eduPersonEntitlement'] = 'https://borrow.btaa.org/reciprocalborrower'
 
     get :callback
 
@@ -97,10 +97,10 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     assert_select '.user-authorized'
   end
 
-  test 'callback should show eligible for valid eduPersonScopedAffiliation, ignoring case' do
+  test 'callback should show eligible for valid eduPersonEntitlement, ignoring case' do
     session[:lending_org_code] = 'umd'
     session[:auth_org_code] = 'uiowa'
-    @request.env['eduPersonScopedAffiliation'] = 'Member@uiowa.edu'
+    @request.env['eduPersonEntitlement'] = 'HTTPS://borrow.BTAA.org/reciprocalBorrower'
 
     get :callback
 
@@ -108,8 +108,8 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     assert_select '.user-authorized'
   end
 
-  test 'callback should show not eligible for invalid eduPersonScopedAffiliation' do
-    # eduPersonScopedAffiliation is nil
+  test 'callback should show not eligible for invalid eduPersonEntitlement' do
+    # eduPersonEntitlement is nil
     session[:lending_org_code] = 'umd'
     session[:auth_org_code] = 'uiowa'
 
@@ -118,20 +118,20 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     assert_response :success
     assert_select '.user-not-authorized'
 
-    # eduPersonScopedAffiliation is N/A
+    # eduPersonEntitlement is N/A
     session[:lending_org_code] = 'umd'
     session[:auth_org_code] = 'uiowa'
-    @request.env['eduPersonScopedAffiliation'] = 'N/A'
+    @request.env['eduPersonEntitlement'] = 'N/A'
 
     get :callback
 
     assert_response :success
     assert_select '.user-not-authorized'
 
-    # auth_org code does not match eduPersonScopedAffiliation
+    # eduPersonEntitlement is some other string
     session[:lending_org_code] = 'umd'
     session[:auth_org_code] = 'uiowa'
-    @request.env['eduPersonScopedAffiliation'] = 'member@rutgers.edu'
+    @request.env['eduPersonEntitlement'] = 'not_a_reciprocal_borrower'
 
     get :callback
 
