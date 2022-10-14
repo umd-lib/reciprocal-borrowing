@@ -49,7 +49,7 @@ production:
 
     iu: &id_iu
       code: 'iu'
-      name: 'Indiana University'
+      name: 'Indiana University Bloomington'
       idp_entity_id: 'urn:mace:incommon:iu.edu'
       display_order: 2
 
