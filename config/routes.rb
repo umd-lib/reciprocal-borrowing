@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'shibboleth_login#home'
 
   get 'authenticate/:lending_org_code' => 'shibboleth_login#authenticate', as: :authenticator

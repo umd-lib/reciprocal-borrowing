@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.6'
+gem 'rails', '~> 5.0.7', '>= 5.0.7.2'
 
 # NOTE: The following "bigdecimal" gem specification is required for
 # compatibility when using Ruby 2.6 or greater and Rails 4.x. It should be
