@@ -33,7 +33,7 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     org_list = organizations.values.sort_by { |v| v['display_order'] }
     org_list.each do |lending_org|
       lending_org_code = lending_org['code']
-      get :authenticate, lending_org_code: lending_org_code
+      get :authenticate, params: { lending_org_code: lending_org_code }
       assert_response :success
 
       # authenicate page should contain organization full name
@@ -46,7 +46,7 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     org_list = organizations.values.sort_by { |v| v['display_order'] }
     org_list.each do |lending_org|
       lending_org_code = lending_org['code']
-      get :authenticate, lending_org_code: lending_org_code
+      get :authenticate, params: { lending_org_code: lending_org_code }
       assert_response :success
 
       org_list.each do |initiate_org|
@@ -67,17 +67,17 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
   end
 
   test 'authenticate with invalid org code should show 404 error page' do
-    get :authenticate, lending_org_code: 'org_does_not_exist'
+    get :authenticate, params: { lending_org_code: 'org_does_not_exist' }
     assert_redirected_to controller: 'errors', action: 'not_found'
   end
 
   test 'should get initiator' do
-    get :initiator, org_code: 'umd'
+    get :initiator, params: { org_code: 'umd' }
     assert_response :redirect
   end
 
   test 'initiator with invalid org code should show 404 error page' do
-    get :initiator, org_code: 'org_does_not_exist'
+    get :initiator, params: { org_code: 'org_does_not_exist' }
     assert_redirected_to controller: 'errors', action: 'not_found'
   end
 
