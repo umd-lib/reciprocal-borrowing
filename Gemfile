@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
+gem 'rails', '~> 6.0.6', '>= 6.0.6.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap-sass', '3.3.6'
 
 # dotenv - For storing production configuration parameters
-gem 'dotenv-rails', '~> 2.2.1'
+gem 'dotenv-rails', '~> 2.7.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
