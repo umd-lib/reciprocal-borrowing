@@ -16,8 +16,8 @@
 
         <ul id="organization_list">
           <% @org_list.each do |org| %>
-            <% org_code = org['code'] %>
-            <% org_name = org['name'] %>
+            <% org_code = org[:code] %>
+            <% org_name = org[:name] %>
 
             <%= content_tag(:li, class: "", id: org_code + "_entry") do %>
               <% if org_code == @lending_org_code %>

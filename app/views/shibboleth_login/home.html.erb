@@ -20,8 +20,8 @@
 
         <ul id="organization_list">
           <% @org_list.each do |org| %>
-            <% lending_org_code = org['code'] %>
-            <% lending_org_name = org['name'] %>
+            <% lending_org_code = org[:code] %>
+            <% lending_org_name = org[:name] %>
             <li id="<%= lending_org_code + "_entry" %>">
             <a href="/authenticate/<%= lending_org_code %>"><%= lending_org_name %></a>
             </li>
