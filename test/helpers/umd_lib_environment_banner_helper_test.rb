@@ -47,7 +47,8 @@ class UmdLibEnvironmentBannerHelperTest < ActiveSupport::TestCase
     ENV['ENVIRONMENT_BANNER_BACKGROUND'] = '#777777'
     assert_equal(
       "<div class='environment-banner' style='background-color: #777777; color: #ff0000;'>TestingForeBack</div>",
-      @banner.umd_lib_environment_banner)
+      @banner.umd_lib_environment_banner
+    )
   end
 
   test 'A ENVIRONMENT_BANNER_ENABLED of "true" enables banner display' do
@@ -57,7 +58,8 @@ class UmdLibEnvironmentBannerHelperTest < ActiveSupport::TestCase
     ENV['ENVIRONMENT_BANNER_ENABLED'] = 'true'
     assert_equal(
       "<div class='environment-banner' style='background-color: #777777; color: #ff0000;'>BannerEnabledTrue</div>",
-      @banner.umd_lib_environment_banner)
+      @banner.umd_lib_environment_banner
+    )
   end
 
   test 'A blank ENVIRONMENT_BANNER_ENABLED enables banner display' do
@@ -67,7 +69,8 @@ class UmdLibEnvironmentBannerHelperTest < ActiveSupport::TestCase
     ENV['ENVIRONMENT_BANNER_ENABLED'] = ''
     assert_equal(
       "<div class='environment-banner' style='background-color: #777777; color: #ff0000;'>BannerEnabledBlank</div>",
-      @banner.umd_lib_environment_banner)
+      @banner.umd_lib_environment_banner
+    )
   end
 
   test 'ENVIRONMENT_BANNER_ENABLED of "false" prevents banner display' do
@@ -99,7 +102,8 @@ class UmdLibEnvironmentBannerHelperTest < ActiveSupport::TestCase
     ENV['ENVIRONMENT_BANNER_BACKGROUND'] = '#777777'
     assert_equal(
       "<div class='environment-banner' style='background-color: #777777; color: #ff0000;'>TestingProdWithEnv</div>",
-      @banner.umd_lib_environment_banner)
+      @banner.umd_lib_environment_banner
+    )
   end
 
   test 'Verify that "extra_padding_top" is enabled on first invocation' do
