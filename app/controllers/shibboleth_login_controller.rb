@@ -38,7 +38,7 @@ class ShibbolethLoginController < ApplicationController
     end
   end
 
-  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
   def callback
     @lending_org_code = session[:lending_org_code]
     @auth_org_code = session[:auth_org_code]
@@ -60,7 +60,7 @@ class ShibbolethLoginController < ApplicationController
                         "authorized=#{@user_authorized}"
     TransactionsLogger.info(transaction_entry)
   end
-  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
 
   def hosting
   end
