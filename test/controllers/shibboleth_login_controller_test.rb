@@ -33,7 +33,7 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     org_list = organizations.values.sort_by { |v| v[:display_order] }
     org_list.each do |lending_org|
       lending_org_code = lending_org[:code]
-      get :authenticate, params: { lending_org_code: lending_org_code }
+      get :authenticate, params: { lending_org_code: }
       assert_response :success
 
       # authenicate page should contain organization full name
@@ -46,7 +46,7 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     org_list = organizations.values.sort_by { |v| v[:display_order] }
     org_list.each do |lending_org|
       lending_org_code = lending_org[:code]
-      get :authenticate, params: { lending_org_code: lending_org_code }
+      get :authenticate, params: { lending_org_code: }
       assert_response :success
 
       org_list.each do |initiate_org|
