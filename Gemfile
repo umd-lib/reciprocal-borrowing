@@ -46,7 +46,8 @@ group :test do
   gem 'minitest-ci', '~> 3.0.3'
 
   # Code analysis tools
-  gem 'rubocop', '~> 0.39.0', require: false
+  gem 'rubocop', '= 1.55.0', require: false
+  gem 'rubocop-rails', '= 2.20.2', require: false
   gem 'rubocop-checkstyle_formatter', '~> 0.2.0', require: false
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
