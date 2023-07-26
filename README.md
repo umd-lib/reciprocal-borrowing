@@ -6,6 +6,25 @@ patron eligibility for
 [reciprocal borrowing](https://www.btaa.org/projects/library/reciprocal-borrowing/introduction)
 between members of the [Big Ten Academic Alliance](https://www.btaa.org/).
 
+Reciprocal Borrowing is different from other UMD/SSDR Rails applications:
+
+1) It does not use a database
+
+2) It does not utilize the following Rails components:
+
+* ActiveRecord
+* ActiveStorage
+* ActionMailer
+* ActionMailbox
+* ActionText
+* ActionCable
+
+3) It does not use the “umd-lib/umd_lib_style”
+   (<https://github.com/umd-lib/umd_lib_style>) gem for styling.
+
+4) It uses Sprockets (<https://github.com/rails/sprockets>) for the asset
+   pipeline (as opposed to “webpacker")
+
 ## Quick Start
 
 This application must be added to a server acting as a Shibboleth Service
@@ -48,6 +67,32 @@ the correct "eduPersonEntitlement" attribute back to the application.
 Conversely, when running on the dev, stage, or production servers, there is no
 known way to show that a user in ineligible for borrow because the UMD server
 always seems pass back the expected property.
+
+### Transactions Logging
+
+The "transactions.log" file contains the results of *completed* authentications,
+in which the user was successfully authenticated.
+
+Each line in the "tranactions.log" file has the following form:
+
+```text
+[<TIMESTAMP>] <IDENTIFIER>,lending_org_code=<LENDING_ORG>,auth_org_code=<AUTH_ORG>,authorized=[true|false]
+```
+
+where:
+
+* \<TIMESTAMP>: The date/time of the completed authentication
+* \<IDENTIFIER>: The "eduPersonTargetedID" attribute returned by Shibboleth, or
+  "N/A" if it is not provided. As described in
+  <https://wiki.refeds.org/display/STAN/eduPerson+2020-01#eduPerson202001-eduPersonTargetedID>
+  it is a "A persistent, non-reassigned, opaque identifier for a principal."
+* \<LENDING_ORG>: The code (from "config/shibboleth_config.yml") of the lending
+  organization
+* \<AUTH_ORG>: The code (from "config/shibboleth_config.yml") of the
+  organization used to authenticate the user.
+
+If "authorized" it "true", the user is authorized to borrow, if "false" the
+user is not.
 
 ## Application Configuration
 
