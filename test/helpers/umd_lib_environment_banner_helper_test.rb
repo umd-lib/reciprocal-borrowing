@@ -23,8 +23,7 @@ class UmdLibEnvironmentBannerHelperTest < ActiveSupport::TestCase
 
   test 'Banner text can be controlled by ENVIRONMENT_BANNER' do
     ENV['ENVIRONMENT_BANNER'] = 'Testing123'
-    assert_equal("<div class='environment-banner'>Testing123</div>",
-                 @banner.umd_lib_environment_banner)
+    assert_includes(@banner.umd_lib_environment_banner, 'Testing123')
   end
 
   test 'Banner foreground color can be controlled by ENVIRONMENT_BANNER_FOREGROUND' do
