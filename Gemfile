@@ -19,6 +19,9 @@ gem 'jbuilder', '~> 2.7'
 # Add Bootstrap
 gem 'bootstrap-sass', '3.3.6'
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
 # dotenv - For storing production configuration parameters
 gem 'dotenv-rails', '~> 2.7.0'
 
