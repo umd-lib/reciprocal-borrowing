@@ -123,6 +123,34 @@ provided to assist with this process. Simply copy the "env_example" file to
 The configured .env file should not be checked into the Git repository, as it
 contains credential information.
 
+## Environment Banner
+
+In keeping with SSDR policy, an "environment banner" will be displayed at the
+top of each page when running on non-production servers.
+
+By default, in the local development environment (determined by
+`Rails.env.development?`returning `true`), a "Local Environment" banner will be
+displayed.
+
+On non-production servers, the environment banner can be configured using the following environment variables:
+
+* ENVIRONMENT_BANNER - the text to display in the banner
+* ENVIRONMENT_BANNER_FOREGROUND - the foreground color for the banner, as a CSS color
+* ENVIRONMENT_BANNER_BACKGROUND - the background color for the banner, as a CSS color
+* ENVIRONMENT_BANNER_ENABLED - (optional) "false" (case-sensitive) disables the
+  banner. Anything else (including blank, or not providing the variable) enables
+  the banner.
+
+Sample configuration for an environment banner displaying
+"Example Banner Environment" on a blue background with orange text:
+
+```text
+ENVIRONMENT_BANNER_ENABLED=true
+ENVIRONMENT_BANNER_BACKGROUND="#0000ff"
+ENVIRONMENT_BANNER_FOREGROUND="#ffa500"
+ENVIRONMENT_BANNER=Example Banner Environment
+```
+
 ## License
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations
