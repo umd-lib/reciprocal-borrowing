@@ -1,20 +1,40 @@
+require: rubocop-rails
+
 # Enables Rails cops
 Rails:
   Enabled: true
 
 # Exclude auto-generated files
 AllCops:
+  NewCops: enable
   Exclude:
-    - 'bin/setup'
-    - 'bin/spring'
-    - 'config/application.rb'
-    - 'db/schema.rb'
-    - 'db/migrate/*'
-  TargetRubyVersion: 2.2
+    - 'config.ru'
+    - 'Rakefile'
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+  TargetRubyVersion: 3.2
+  TargetRailsVersion: 6.1
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
 
 # Increase max allowed line length
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
+
+Lint/EmptyClass:
+  Exclude:
+    - 'test/test_helper.rb'
+
+Rails/ActionControllerTestCase:
+  # Disabling because ActionControllerTestCases are currently the best fit
+  # for testing the controllers
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'test/test_helper.rb'
 
 # The following configuration exclude checks that seem
 # silly, or conflict with the way Rails naturally does
@@ -27,9 +47,28 @@ Style/Documentation:
     - 'test/controllers/*_controller_test.rb'
     - 'test/helpers/*_helper_test.rb'
 
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'test/test_helper.rb'
+Style/EmptyMethod:
+  EnforcedStyle: expanded
 
-Style/IndentationConsistency:
-  EnforcedStyle: rails
+Style/FrozenStringLiteralComment:
+  # Disabling because Ruby 3 did not ultimately chose to make literal
+  # strings frozen by default, and there are no clear plans to do so
+  # in the future.
+  Enabled: false
+
+# Disabling the following as they interfere with the Rails layout of the
+# Gemfile, making changes when doing upgrades less visible
+Bundler/OrderedGems:
+  Enabled: false
+
+Layout/EmptyLines:
+  Exclude:
+    - Gemfile
+
+Style/StringLiterals:
+  Exclude:
+    - Gemfile
+
+Style/SymbolArray:
+  Exclude:
+    - Gemfile

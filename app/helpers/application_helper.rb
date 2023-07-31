@@ -1,10 +1,10 @@
 module ApplicationHelper
   def umd_lib_environment_banner
-    if environment
-      content_tag :div, "#{environment} Environment",
-                  class: 'environment-banner',
-                  id: "environment-#{environment.downcase}"
-    end
+    return unless environment
+
+    content_tag :div, "#{environment} Environment",
+                class: 'environment-banner',
+                id: "environment-#{environment.downcase}"
   end
 
   private
