@@ -199,3 +199,11 @@ development:
 test:
   organizations:
     <<: *id_development_organization
+
+# development_docker Environment Configuration
+development_docker:
+  organizations:
+    <<: *id_development_organization
+    umd:
+      <<: *id_umd
+      idp_entity_id: 'https://shib-idp/idp/shibboleth'

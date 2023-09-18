@@ -27,17 +27,31 @@ Reciprocal Borrowing is different from other UMD/SSDR Rails applications:
 
 ## Quick Start
 
-This application must be added to a server acting as a Shibboleth Service
-Provider (SP). In order to be used in a production environment, the SP must be
-registered with [InCommon](https://www.incommon.org/)).
-
-For local development, this application can be used in conjunction with the
-Vagrant-based Shibboleth Identity Provider (IdP) and SP provided in the
-[umd-lib/reciprocal-borrowing-vagrant](https://github.com/umd-lib/reciprocal-borrowing-vagrant)
+For local development, this application can be used in conjunction with a
+Docker-based Shibboleth Identity Provider (IdP) and SP provided in the
+[umd-lib/reciprocal-borrowing-dev-env](https://github.com/umd-lib/reciprocal-borrowing-dev-env)
 GitHub repository. Refer to the README.md file in that repository for setup
 instructions.
 
+### "development_docker" Environment
+
+An additional "development_docker" environment has been added to the
+Rails standard "development", "test", and "production" environments, to support
+running in the "umd-lib/reciprocal-borrowing-dev-env" Docker stack.
+
+This environment contains:
+
+* changes to use the "borrow-local" hostname
+* changes to the "Univerisity of Maryland" Shibboleth link to use the Shibboleth
+  IdP in the Docker stack
+* modifications to support running on M-series (Apple Silicon) laptops
+* Values for the environment variables in the ".env" file
+
 ## Application Functionality
+
+This application must be added to a server acting as a Shibboleth Service
+Provider (SP). In order to be used in a production environment, the SP must be
+registered with [InCommon](https://www.incommon.org/)).
 
 The functionality of this application is extremely straightforward:
 
@@ -60,11 +74,7 @@ The functionality of this application is extremely straightforward:
 4) After successfully authenticating, the browser is redirected back to this
    application, which indicates whether the patron is eligible to borrow.
 
-**Note:** The local development environment (when used in conjunction with the
-"reciprocal-borrowing-vagrant" as the Shibboleth SP and IdP) *cannot* show that
-a user is eligible to borrow because the IdP is not currently configured to pass
-the correct "eduPersonEntitlement" attribute back to the application.
-Conversely, when running on the dev, stage, or production servers, there is no
+**Note:** When running on the dev, stage, or production servers, there is no
 known way to show that a user in ineligible for borrow because the UMD server
 always seems pass back the expected property.
 
