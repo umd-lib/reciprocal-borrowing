@@ -38,7 +38,7 @@
           <p>
         </section>
 
-        <% if Rails.env.development? %>
+        <% if Rails.env.development? || Rails.env.development_docker? %>
           <div class="panel panel-warning">
             <div class="panel-heading">
 
