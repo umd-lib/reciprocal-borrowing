@@ -1,10 +1,9 @@
 # reciprocal-borrowing
 
 This Rails application is designed to work with Shibboleth and the
-[InCommon](https://www.incommon.org/) identity management federation to verify
-patron eligibility for
-[reciprocal borrowing](https://www.btaa.org/projects/library/reciprocal-borrowing/introduction)
-between members of the [Big Ten Academic Alliance](https://www.btaa.org/).
+[InCommon][incommon] identity management federation to verify patron eligibility
+for [reciprocal borrowing][btaa_reciprocal_borrowing] between members of the
+[Big Ten Academic Alliance][btaa].
 
 Reciprocal Borrowing is different from other UMD/SSDR Rails applications:
 
@@ -28,9 +27,9 @@ Reciprocal Borrowing is different from other UMD/SSDR Rails applications:
 ## Quick Start
 
 For local development, this application can be used in conjunction with a
-Docker-based Shibboleth Identity Provider (IdP) and SP provided in the
-[umd-lib/reciprocal-borrowing-dev-env](https://github.com/umd-lib/reciprocal-borrowing-dev-env)
-GitHub repository. Refer to the README.md file in that repository for setup
+Docker-based Shibboleth Identity Provider (IdP) and Shibboleth Service Provider
+(SP) provided in the [umd-lib/reciprocal-borrowing-dev-env][dev-env] GitHub
+repository. Refer to the README.md file in that repository for setup
 instructions.
 
 ### "development_docker" Environment
@@ -42,8 +41,8 @@ running in the "umd-lib/reciprocal-borrowing-dev-env" Docker stack.
 This environment contains:
 
 * changes to use the "borrow-local" hostname
-* changes to the "Univerisity of Maryland" Shibboleth link to use the Shibboleth
-  IdP in the Docker stack
+* changes to the "shibboleth_config.yml" file so that all organizations use the
+  Shibboleth IdP in the Docker stack
 * modifications to support running on M-series (Apple Silicon) laptops
 * Values for the environment variables in the ".env" file
 
@@ -51,7 +50,7 @@ This environment contains:
 
 This application must be added to a server acting as a Shibboleth Service
 Provider (SP). In order to be used in a production environment, the SP must be
-registered with [InCommon](https://www.incommon.org/)).
+registered with [InCommon][incommon]).
 
 The functionality of this application is extremely straightforward:
 
@@ -83,7 +82,7 @@ always seems pass back the expected property.
 The "transactions.log" file contains the results of *completed* authentications,
 in which the user was successfully authenticated.
 
-Each line in the "tranactions.log" file has the following form:
+Each line in the "transactions.log" file has the following form:
 
 ```text
 [<TIMESTAMP>] <IDENTIFIER>,lending_org_code=<LENDING_ORG>,auth_org_code=<AUTH_ORG>,authorized=[true|false]
@@ -101,21 +100,22 @@ where:
 * \<AUTH_ORG>: The code (from "config/shibboleth_config.yml") of the
   organization used to authenticate the user.
 
-If "authorized" it "true", the user is authorized to borrow, if "false" the
+If "authorized" is "true", the user is authorized to borrow, if "false" the
 user is not.
 
 ## Application Configuration
 
 The config/shibboleth_config.yml file contains the configuration information for
-he organizations participating in reciprocal borrowing, and has been
+the organizations participating in reciprocal borrowing, and has been
 pre-populated with Big Ten Academic Alliance members. The file contains
-different sections for the "production", "development", and "test" environments.
+different sections for the "production", "development", "development_docker",
+and "test" environments.
 
 The application should work "out of the box" when used in conjunction with the
-[umd-lib/reciprocal-borrowing-vagrant](https://github.com/umd-lib/reciprocal-borrowing-vagrant)
-GitHub repository, in a "development" Rails environment. The "development"
-section of the shibboleth_config.yml has been pre-configured so that
-"idp_entity_id" for all organizations points to the Vagrant IdP.
+[umd-lib/reciprocal-borrowing-dev-env][dev-env] GitHub repository, in a
+"development_docker" Rails environment. The "development_docker" section of the
+shibboleth_config.yml has been pre-configured so that "idp_entity_id" for all
+organizations points to the Docker IdP.
 
 For a "production" environment, the shibboleth_config.yml file has been
 pre-populated "idp_entity_id" values derived from the InCommon metadata for
@@ -142,7 +142,8 @@ By default, in the local development environment (determined by
 `Rails.env.development?`returning `true`), a "Local Environment" banner will be
 displayed.
 
-On non-production servers, the environment banner can be configured using the following environment variables:
+On non-production servers, the environment banner can be configured using the
+following environment variables:
 
 * ENVIRONMENT_BANNER - the text to display in the banner
 * ENVIRONMENT_BANNER_FOREGROUND - the foreground color for the banner, as a CSS color
@@ -165,3 +166,9 @@ ENVIRONMENT_BANNER=Example Banner Environment
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations
 (Apache 2.0).
+
+---
+[btaa]: https://www.btaa.org/
+[btaa_reciprocal_borrowing]: https://www.btaa.org/projects/library/reciprocal-borrowing/introduction
+[dev-env]: https://github.com/umd-lib/reciprocal-borrowing-dev-env
+[incommon]: https://www.incommon.org/
