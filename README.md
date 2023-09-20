@@ -169,6 +169,6 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations
 
 ---
 [btaa]: https://www.btaa.org/
-[btaa_reciprocal_borrowing]: https://www.btaa.org/projects/library/reciprocal-borrowing/introduction
+[btaa_reciprocal_borrowing]: https://www.btaa.org/projects/library/reciprocal-borrowing/
 [dev-env]: https://github.com/umd-lib/reciprocal-borrowing-dev-env
 [incommon]: https://www.incommon.org/
