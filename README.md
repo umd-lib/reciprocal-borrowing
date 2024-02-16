@@ -50,7 +50,7 @@ This environment contains:
 
 This application must be added to a server acting as a Shibboleth Service
 Provider (SP). In order to be used in a production environment, the SP must be
-registered with [InCommon][incommon]).
+registered with [InCommon][incommon].
 
 The functionality of this application is extremely straightforward:
 
@@ -74,7 +74,7 @@ The functionality of this application is extremely straightforward:
    application, which indicates whether the patron is eligible to borrow.
 
 **Note:** When running on the dev, stage, or production servers, there is no
-known way to show that a user in ineligible for borrow because the UMD server
+known way to show that a user in ineligible for borrowing because the UMD server
 always seems pass back the expected property.
 
 ### Transactions Logging
@@ -105,8 +105,8 @@ user is not.
 
 ## Application Configuration
 
-The config/shibboleth_config.yml file contains the configuration information for
-the organizations participating in reciprocal borrowing, and has been
+The "config/shibboleth_config.yml" file contains the configuration information
+for the organizations participating in reciprocal borrowing, and has been
 pre-populated with Big Ten Academic Alliance members. The file contains
 different sections for the "production", "development", "development_docker",
 and "test" environments.
@@ -120,13 +120,13 @@ organizations points to the Docker IdP.
 For a "production" environment, the shibboleth_config.yml file has been
 pre-populated "idp_entity_id" values derived from the InCommon metadata for
 those organizations. Note that these values will only work when running from an
-SP registered w
+SP registered with InCommon.
 
 ## Dockerfile
 
-A "Dockerfile" and the associated "docker_config" directory for creating the
-Docker image used with the [umd-lib/k8s-reciprocal-borrowing][k8s-rb]
-Kubernetes configuration.
+The "Dockerfile" (and associated "docker_config" directory) for creating the
+Docker image are intended for use with the
+[umd-lib/k8s-reciprocal-borrowing][k8s-rb] Kubernetes configuration.
 
 The Dockerfile combines the following applications into a single Docker image:
 
@@ -184,9 +184,9 @@ GitHub for information about setting up a MacBook to use the Kubernetes
     $ cd reciprocal-borrowing
     ```
 
-2) Checkout the appropriate Git tag, branch, or commit for the Docker images.
+2) Checkout the appropriate Git tag, branch, or commit for the Docker image.
 
-3) Set up a "APP_TAG" environment variable:
+3) Set up an "APP_TAG" environment variable:
 
     ```bash
     $ export APP_TAG=<DOCKER_IMAGE_TAG>
@@ -224,7 +224,7 @@ A sample "env_example" file has been provided to assist with this process.
 The "env_example" file is mainly for documenting the necessary and optional
 environment variables. Creating a ".env" file when using the
 "umd-lib/reciprocal-borrowing-dev-env" GitHub repository is not necessary
-as the relevant configuration is already in placing in the
+as the relevant configuration is already in place in the
 `config/environments/development_docker.rb` file.
 
 In the production environment, the appropriate environment variables are
@@ -267,7 +267,7 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations
 
 ---
 [btaa]: https://www.btaa.org/
-[btaa_reciprocal_borrowing]: https://www.btaa.org/projects/library/reciprocal-borrowing/
+[btaa_reciprocal_borrowing]: https://btaa.org/library/programs-and-services/reciprocal-borrowing
 [dev-env]: https://github.com/umd-lib/reciprocal-borrowing-dev-env
 [k8s-rb]: https://github.com/umd-lib/k8s-reciprocal-borrowing
 [incommon]: https://www.incommon.org/
