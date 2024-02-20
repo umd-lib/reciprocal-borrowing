@@ -50,7 +50,7 @@ This environment contains:
 
 This application must be added to a server acting as a Shibboleth Service
 Provider (SP). In order to be used in a production environment, the SP must be
-registered with [InCommon][incommon]).
+registered with [InCommon][incommon].
 
 The functionality of this application is extremely straightforward:
 
@@ -74,7 +74,7 @@ The functionality of this application is extremely straightforward:
    application, which indicates whether the patron is eligible to borrow.
 
 **Note:** When running on the dev, stage, or production servers, there is no
-known way to show that a user in ineligible for borrow because the UMD server
+known way to show that a user in ineligible for borrowing because the UMD server
 always seems pass back the expected property.
 
 ### Transactions Logging
@@ -105,8 +105,8 @@ user is not.
 
 ## Application Configuration
 
-The config/shibboleth_config.yml file contains the configuration information for
-the organizations participating in reciprocal borrowing, and has been
+The "config/shibboleth_config.yml" file contains the configuration information
+for the organizations participating in reciprocal borrowing, and has been
 pre-populated with Big Ten Academic Alliance members. The file contains
 different sections for the "production", "development", "development_docker",
 and "test" environments.
@@ -122,16 +122,114 @@ pre-populated "idp_entity_id" values derived from the InCommon metadata for
 those organizations. Note that these values will only work when running from an
 SP registered with InCommon.
 
-## Production Environment Configuration
+## Dockerfile
 
-The application uses the "dotenv" gem to configure the production environment.
-The gem expects a ".env" file in the root directory to contain the environment
-variables that are provided to Ruby. A sample "env_example" file has been
-provided to assist with this process. Simply copy the "env_example" file to
-".env" and fill out the parameters as appropriate.
+The "Dockerfile" (and associated "docker_config" directory) for creating the
+Docker image are intended for use with the
+[umd-lib/k8s-reciprocal-borrowing][k8s-rb] Kubernetes configuration.
 
-The configured .env file should not be checked into the Git repository, as it
-contains credential information.
+The Dockerfile combines the following applications into a single Docker image:
+
+* Apache HTTPD web server
+* Shibboleth Service Provider (Shibboleth SP)
+* Passenger Phusion app server
+* The Reciprocal Borrowing Rails application
+
+Combining all these applications is necessary because:
+
+* The Shibboleth Service Provider runs as a separate process, but communicates
+  with Apache via an Apache module (see
+  <https://shibboleth.atlassian.net/wiki/spaces/SP3/pages/2065335062/Apache>)
+
+* Phusion Passenger is integrated with Apache as a module
+  (see “Apache integration mode” in
+  <https://www.phusionpassenger.com/docs/advanced_guides/in_depth/ruby/integration_modes.html>).
+  This is necessary because the Shibboleth Service Provider stores the
+  Shibboleth attributes received from the Shibboleth IdP as Apache “per-request”
+  environment variables (see <https://httpd.apache.org/docs/2.4/env.html>) and
+  the only way that the Reciprocal Borrowing application can access them is via
+  environment variables set by Phusion Passenger (which as a module, has access
+  to the Apache “per-request” environment variables).
+
+* Phusion Passenger is responsible for starting the Reciprocal Borrowing
+  application, so it is not necessary to start it as a separate process.
+
+**Note:** Shibboleth attributes could be passed to the Reciprocal Borrowing
+application from Apache via HTTP request headers, which would remove the need for
+Phusion Passenger, and allow the Reciprocal Borrowing application to run in
+a separate container. This method, however, appears to be strongly discouraged
+by Shibboleth (see <https://shibboleth.atlassian.net/wiki/spaces/SP3/pages/2065335257/AttributeAccess>).
+
+## Building the Docker Image for K8s Deployment
+
+The following procedure uses the Docker "buildx" functionality and the
+Kubernetes "build" namespace to build the Docker image. This procedure should
+work on both "arm64" and "amd64" MacBooks.
+
+The image will be automatically pushed to the Nexus.
+
+### Local Machine Setup
+
+See <https://github.com/umd-lib/k8s/blob/main/docs/DockerBuilds.md> in
+GitHub for information about setting up a MacBook to use the Kubernetes
+"build" namespace.
+
+### Creating the Docker image
+
+1) In an empty directory, checkout the Git repository and switch into the
+   directory:
+
+    ```bash
+    $ git clone git@github.com:umd-lib/reciprocal-borrowing.git
+    $ cd reciprocal-borrowing
+    ```
+
+2) Checkout the appropriate Git tag, branch, or commit for the Docker image.
+
+3) Set up an "APP_TAG" environment variable:
+
+    ```bash
+    $ export APP_TAG=<DOCKER_IMAGE_TAG>
+    ```
+
+   where \<DOCKER_IMAGE_TAG> is the Docker image tag to associate with the
+   Docker image. This will typically be the Git tag for the application version,
+   or some other identifier, such as a Git commit hash. For example, using the
+   Git tag of "1.2.0":
+
+    ```bash
+    $ export APP_TAG=1.2.0
+    ```
+
+4) Switch to the Kubernetes "build" namespace:
+
+    ```bash
+    $ kubectl config use-context build
+    ```
+
+5) Create the "docker.lib.umd.edu/reciprocal-borrowing" Docker image:
+
+    ```bash
+    $ docker buildx build --no-cache --platform linux/amd64 --push --no-cache \
+        --builder=kube  -f Dockerfile -t docker.lib.umd.edu/reciprocal-borrowing:$APP_TAG .
+    ```
+
+   The Docker image will be automatically pushed to the Nexus.
+
+## Environment Configuration (Local Development)
+
+The application uses the "dotenv" gem to configure the application environment.
+A sample "env_example" file has been provided to assist with this process.
+
+The "env_example" file is mainly for documenting the necessary and optional
+environment variables. Creating a ".env" file when using the
+"umd-lib/reciprocal-borrowing-dev-env" GitHub repository is not necessary
+as the relevant configuration is already in place in the
+`config/environments/development_docker.rb` file.
+
+In the production environment, the appropriate environment variables are
+provided in the container environment by the "umd-lib/k8s-reciprocal-borrowing"
+Kubernetes configuration.
 
 ## Environment Banner
 
@@ -169,6 +267,7 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations
 
 ---
 [btaa]: https://www.btaa.org/
-[btaa_reciprocal_borrowing]: https://www.btaa.org/projects/library/reciprocal-borrowing/
+[btaa_reciprocal_borrowing]: https://btaa.org/library/programs-and-services/reciprocal-borrowing
 [dev-env]: https://github.com/umd-lib/reciprocal-borrowing-dev-env
+[k8s-rb]: https://github.com/umd-lib/k8s-reciprocal-borrowing
 [incommon]: https://www.incommon.org/
