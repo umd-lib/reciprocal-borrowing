@@ -26,7 +26,7 @@ production:
   #
   #    https://www.incommon.org/federation/info/all-entities.html
   #
-  # Select the organzation, then select "more technical information" link in
+  # Select the organization, then select "more technical information" link in
   # the dialog to see the entityID.
   #
   # The "display_order" number is only used to determine the order in which
@@ -101,29 +101,35 @@ production:
       idp_entity_id: 'urn:mace:incommon:osu.edu'
       display_order: 10
 
+    uoregon: &id_uoregon
+      code: 'uoregon'
+      name: 'University of Oregon'
+      idp_entity_id: 'https://shibboleth.uoregon.edu/idp/shibboleth'
+      display_order: 11
+
     psu: &id_psu
       code: 'psu'
       name: 'Pennsylvania State University'
       idp_entity_id: 'urn:mace:incommon:psu.edu'
-      display_order: 11
+      display_order: 12
 
     purdue: &id_purdue
       code: 'purdue'
       name: 'Purdue University'
       idp_entity_id: 'https://idp.purdue.edu/idp/shibboleth'
-      display_order: 12
+      display_order: 13
 
     rutgers: &id_rutgers
       code: 'rutgers'
       name: 'Rutgers University'
       idp_entity_id: 'urn:mace:incommon:rutgers.edu'
-      display_order: 13
+      display_order: 14
 
     wisc: &id_wisc
       code: 'wisc'
       name: 'University of Wisconsin-Madison'
       idp_entity_id: 'https://login.wisc.edu/idp/shibboleth'
-      display_order: 14
+      display_order: 15
 
 # Development Environment Configuration
 #
@@ -181,6 +187,10 @@ development:
 
     psu:
       <<: *id_psu
+      idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
+
+    uoregon:
+      <<: *id_uoregon
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
 
     purdue:
@@ -245,6 +255,10 @@ development_docker:
 
     psu:
       <<: *id_psu
+      idp_entity_id: 'https://shib-idp/idp/shibboleth'
+
+    uoregon:
+      <<: *id_uoregon
       idp_entity_id: 'https://shib-idp/idp/shibboleth'
 
     purdue:
