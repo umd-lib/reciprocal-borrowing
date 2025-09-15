@@ -55,22 +55,18 @@ registered with [InCommon][incommon].
 The functionality of this application is extremely straightforward:
 
 1) The home page provides a list of organizations participating in reciprocal
-   borrowing. On this page, the organization doing the lending is selected.
+   borrowing. After selecting the organization to use for authentication, the
+   application redirects the browser (via an entityID provided to the
+   Shibboleth SP running on the server) to a Shibboleth IdP for the selected
+   organization.
 
-2) After selecting the lending organization, a second page is shown with a
-   list of organizations. The authenticating organization (the organization the
-   borrowing patron is a member of) is selected. After selecting the
-   organization, the application redirects the browser (via an entityID provided
-   to the Shibboleth SP running on the server) to a Shibboleth IdP for the
-   selected organization.
-
-3) The borrowing patron authenticates via their organizational authentication
+2) The borrowing patron authenticates via their organizational authentication
    process.
 
    **Note:** This step takes place entirely outside of this application, so this
    application never has access to the patron's credentials.
 
-4) After successfully authenticating, the browser is redirected back to this
+3) After successfully authenticating, the browser is redirected back to this
    application, which indicates whether the patron is eligible to borrow.
 
 **Note:** When running on the dev, stage, or production servers, there is no

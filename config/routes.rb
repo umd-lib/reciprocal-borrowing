@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'shibboleth_login#home'
 
-  get 'authenticate/:lending_org_code' => 'shibboleth_login#authenticate', as: :authenticator
   get 'initiate/:org_code' => 'shibboleth_login#initiator', as: :initiator
 
   get 'attributes' => 'shibboleth_login#callback'
