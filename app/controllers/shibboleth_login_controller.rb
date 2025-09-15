@@ -53,12 +53,6 @@ class ShibbolethLoginController < ApplicationController
     @entitlement = @env['eduPersonEntitlement'] || 'N/A'
 
     @user_authorized = user_authorized?(@entitlement)
-
-    transaction_entry = "#{@identifier}," \
-                        "lending_org_code=#{@lending_org_code || 'N/A'}," \
-                        "auth_org_code=#{@auth_org_code || 'N/A'}," \
-                        "authorized=#{@user_authorized}"
-    TransactionsLogger.info(transaction_entry)
   end
   # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
 

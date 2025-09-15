@@ -77,32 +77,6 @@ The functionality of this application is extremely straightforward:
 known way to show that a user in ineligible for borrowing because the UMD server
 always seems pass back the expected property.
 
-### Transactions Logging
-
-The "transactions.log" file contains the results of *completed* authentications,
-in which the user was successfully authenticated.
-
-Each line in the "transactions.log" file has the following form:
-
-```text
-[<TIMESTAMP>] <IDENTIFIER>,lending_org_code=<LENDING_ORG>,auth_org_code=<AUTH_ORG>,authorized=[true|false]
-```
-
-where:
-
-* \<TIMESTAMP>: The date/time of the completed authentication
-* \<IDENTIFIER>: The "eduPersonTargetedID" attribute returned by Shibboleth, or
-  "N/A" if it is not provided. As described in
-  <https://wiki.refeds.org/display/STAN/eduPerson+2020-01#eduPerson202001-eduPersonTargetedID>
-  it is a "A persistent, non-reassigned, opaque identifier for a principal."
-* \<LENDING_ORG>: The code (from "config/shibboleth_config.yml") of the lending
-  organization
-* \<AUTH_ORG>: The code (from "config/shibboleth_config.yml") of the
-  organization used to authenticate the user.
-
-If "authorized" is "true", the user is authorized to borrow, if "false" the
-user is not.
-
 ## Application Configuration
 
 The "config/shibboleth_config.yml" file contains the configuration information
