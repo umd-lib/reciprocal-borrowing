@@ -13,6 +13,7 @@ AllCops:
     - 'bin/**/*'
     - 'config/**/*'
     - 'db/**/*'
+    - 'vendor/**/*'
   TargetRubyVersion: 3.2
   TargetRailsVersion: 6.1
 

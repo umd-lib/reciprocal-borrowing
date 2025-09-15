@@ -4,21 +4,6 @@ class ShibbolethLoginController < ApplicationController
     @org_list = organizations.values.sort_by { |v| v[:display_order] }
   end
 
-  def authenticate # rubocop:disable Metrics/AbcSize
-    @lending_org_code = params['lending_org_code']
-    organizations = Rails.configuration.shibboleth_config['organizations']
-
-    if organizations.key?(@lending_org_code.to_sym)
-      @org_list = organizations.values.sort_by { |v| v[:display_order] }
-      lending_org = organizations[@lending_org_code.to_sym]
-      @lending_org_name = lending_org[:name]
-      session[:lending_org_code] = @lending_org_code
-    else
-      # Was not given a valid org_code, treat as 404 error
-      redirect_to not_found_url
-    end
-  end
-
   def initiator # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     org_code = params['org_code']
     organizations = Rails.configuration.shibboleth_config['organizations']
@@ -38,11 +23,7 @@ class ShibbolethLoginController < ApplicationController
     end
   end
 
-  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
   def callback
-    @lending_org_code = session[:lending_org_code]
-    @auth_org_code = session[:auth_org_code]
-
     @env = request.env
     @params = request.params
 
@@ -53,14 +34,7 @@ class ShibbolethLoginController < ApplicationController
     @entitlement = @env['eduPersonEntitlement'] || 'N/A'
 
     @user_authorized = user_authorized?(@entitlement)
-
-    transaction_entry = "#{@identifier}," \
-                        "lending_org_code=#{@lending_org_code || 'N/A'}," \
-                        "auth_org_code=#{@auth_org_code || 'N/A'}," \
-                        "authorized=#{@user_authorized}"
-    TransactionsLogger.info(transaction_entry)
   end
-  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity
 
   def hosting
   end

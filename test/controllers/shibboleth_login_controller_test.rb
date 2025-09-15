@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disable Metrics/ClassLength
+class ShibbolethLoginControllerTest < ActionController::TestCase
   test 'should get home' do
     get :home
     assert_response :success
@@ -28,49 +28,6 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     end
   end
 
-  test 'authenticate should exist for each organization' do
-    organizations = Rails.configuration.shibboleth_config['organizations']
-    org_list = organizations.values.sort_by { |v| v[:display_order] }
-    org_list.each do |lending_org|
-      lending_org_code = lending_org[:code]
-      get :authenticate, params: { lending_org_code: }
-      assert_response :success
-
-      # authenicate page should contain organization full name
-      assert_select '.lending-org-name', text: lending_org[:name]
-    end
-  end
-
-  test 'authenticate should not contain link to lending org in org list' do
-    organizations = Rails.configuration.shibboleth_config['organizations']
-    org_list = organizations.values.sort_by { |v| v[:display_order] }
-    org_list.each do |lending_org|
-      lending_org_code = lending_org[:code]
-      get :authenticate, params: { lending_org_code: }
-      assert_response :success
-
-      org_list.each do |initiate_org|
-        initiate_org_code = initiate_org[:code]
-        list_id = "#{initiate_org_code}_entry"
-
-        # Make sure each organization has an initiate link, except for the
-        # lending organization
-        assert_select "ul#organization_list>li##{list_id}" do
-          if initiate_org_code == lending_org_code
-            assert_select 'a', { count: 0 }, "Link found for #{initiate_org_code}"
-          else
-            assert_select 'a', count: 1
-          end
-        end
-      end
-    end
-  end
-
-  test 'authenticate with invalid org code should show 404 error page' do
-    get :authenticate, params: { lending_org_code: 'org_does_not_exist' }
-    assert_redirected_to controller: 'errors', action: 'not_found'
-  end
-
   test 'should get initiator' do
     get :initiator, params: { org_code: 'umd' }
     assert_response :redirect
@@ -87,8 +44,6 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
   end
 
   test 'callback should show eligible for valid eduPersonEntitlement' do
-    session[:lending_org_code] = 'umd'
-    session[:auth_org_code] = 'uiowa'
     @request.env['eduPersonEntitlement'] = 'https://borrow.btaa.org/reciprocalborrower'
 
     get :callback
@@ -98,8 +53,6 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
   end
 
   test 'callback should show eligible for valid eduPersonEntitlement, ignoring case' do
-    session[:lending_org_code] = 'umd'
-    session[:auth_org_code] = 'uiowa'
     @request.env['eduPersonEntitlement'] = 'HTTPS://borrow.BTAA.org/reciprocalBorrower'
 
     get :callback
@@ -110,8 +63,6 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
 
   test 'callback should show not eligible for invalid eduPersonEntitlement' do
     # eduPersonEntitlement is nil
-    session[:lending_org_code] = 'umd'
-    session[:auth_org_code] = 'uiowa'
 
     get :callback
 
@@ -119,8 +70,6 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     assert_select '.user-not-authorized'
 
     # eduPersonEntitlement is N/A
-    session[:lending_org_code] = 'umd'
-    session[:auth_org_code] = 'uiowa'
     @request.env['eduPersonEntitlement'] = 'N/A'
 
     get :callback
@@ -129,8 +78,6 @@ class ShibbolethLoginControllerTest < ActionController::TestCase # rubocop:disab
     assert_select '.user-not-authorized'
 
     # eduPersonEntitlement is some other string
-    session[:lending_org_code] = 'umd'
-    session[:auth_org_code] = 'uiowa'
     @request.env['eduPersonEntitlement'] = 'not_a_reciprocal_borrower'
 
     get :callback

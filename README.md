@@ -55,53 +55,23 @@ registered with [InCommon][incommon].
 The functionality of this application is extremely straightforward:
 
 1) The home page provides a list of organizations participating in reciprocal
-   borrowing. On this page, the organization doing the lending is selected.
+   borrowing. After selecting the organization to use for authentication, the
+   application redirects the browser (via an entityID provided to the
+   Shibboleth SP running on the server) to a Shibboleth IdP for the selected
+   organization.
 
-2) After selecting the lending organization, a second page is shown with a
-   list of organizations. The authenticating organization (the organization the
-   borrowing patron is a member of) is selected. After selecting the
-   organization, the application redirects the browser (via an entityID provided
-   to the Shibboleth SP running on the server) to a Shibboleth IdP for the
-   selected organization.
-
-3) The borrowing patron authenticates via their organizational authentication
+2) The borrowing patron authenticates via their organizational authentication
    process.
 
    **Note:** This step takes place entirely outside of this application, so this
    application never has access to the patron's credentials.
 
-4) After successfully authenticating, the browser is redirected back to this
+3) After successfully authenticating, the browser is redirected back to this
    application, which indicates whether the patron is eligible to borrow.
 
 **Note:** When running on the dev, stage, or production servers, there is no
 known way to show that a user in ineligible for borrowing because the UMD server
 always seems pass back the expected property.
-
-### Transactions Logging
-
-The "transactions.log" file contains the results of *completed* authentications,
-in which the user was successfully authenticated.
-
-Each line in the "transactions.log" file has the following form:
-
-```text
-[<TIMESTAMP>] <IDENTIFIER>,lending_org_code=<LENDING_ORG>,auth_org_code=<AUTH_ORG>,authorized=[true|false]
-```
-
-where:
-
-* \<TIMESTAMP>: The date/time of the completed authentication
-* \<IDENTIFIER>: The "eduPersonTargetedID" attribute returned by Shibboleth, or
-  "N/A" if it is not provided. As described in
-  <https://wiki.refeds.org/display/STAN/eduPerson+2020-01#eduPerson202001-eduPersonTargetedID>
-  it is a "A persistent, non-reassigned, opaque identifier for a principal."
-* \<LENDING_ORG>: The code (from "config/shibboleth_config.yml") of the lending
-  organization
-* \<AUTH_ORG>: The code (from "config/shibboleth_config.yml") of the
-  organization used to authenticate the user.
-
-If "authorized" is "true", the user is authorized to borrow, if "false" the
-user is not.
 
 ## Application Configuration
 
