@@ -55,3 +55,13 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
 end
+
+# UMD Customization
+# Force the use of v1.1.0 of the base64 gem, because it is a default gem
+# provided by Ruby 3.2.2, and Passenger Phusion complains about a version
+# mismatch
+#
+# This customization should be re-visited when upgrading to a later version
+# of Ruby.
+gem 'base64', '= 0.1.1'
+# End UMD Customization
