@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
+
+  # UMD Customization
   root 'shibboleth_login#home'
 
   get 'initiate/:org_code' => 'shibboleth_login#initiator', as: :initiator
@@ -11,4 +17,5 @@ Rails.application.routes.draw do
   # Reconfigure error routes to point to dynamic error pages
   match '/404', to: 'errors#not_found', via: :all, as: :not_found
   match '/500', to: 'errors#internal_server_error', via: :all, as: :server_error
+  # End MD Customization
 end
