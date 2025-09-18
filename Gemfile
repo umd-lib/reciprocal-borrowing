@@ -57,11 +57,14 @@ group :test do
 end
 
 # UMD Customization
-# Force the use of v1.1.0 of the base64 gem, because it is a default gem
-# provided by Ruby 3.2.2, and Passenger Phusion complains about a version
-# mismatch
+# The following gems need to be "pinned" to specific versions because they
+# are "default" gems provided by Ruby 3.2.2.
+#
+# Without "pinning" these gem versions, Passenger Phusion will complain
+# about a version mismatch.
 #
 # This customization should be re-visited when upgrading to a later version
 # of Ruby.
 gem 'base64', '= 0.1.1'
+gem 'logger', '= 1.5.3'
 # End UMD Customization

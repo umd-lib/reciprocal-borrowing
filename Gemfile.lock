@@ -122,7 +122,7 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    logger (1.7.0)
+    logger (1.5.3)
     loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -314,6 +314,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.3)
+  logger (= 1.5.3)
   minitest-ci (~> 3.0.3)
   minitest-reporters (~> 1.1.8)
   puma (>= 5.0)
