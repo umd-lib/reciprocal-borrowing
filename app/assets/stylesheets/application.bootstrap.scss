@@ -1,6 +1,7 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
+@use "../../../node_modules/bootstrap/scss/bootstrap";
+@use "../../../node_modules/bootstrap-icons/font/bootstrap-icons";
+
 // UMD Customization
-@import "custom";
-@import "umd_lib_environment_banner.scss";
+@use "custom";
+@use "umd_lib_environment_banner";
 // End UMD Customization
