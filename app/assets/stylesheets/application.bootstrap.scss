@@ -1,2 +1,6 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+// UMD Customization
+@import "custom";
+@import "umd_lib_environment_banner.scss";
+// End UMD Customization
