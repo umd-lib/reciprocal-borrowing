@@ -19,7 +19,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # UMD Customization
 # dotenv - For storing production configuration parameters
-gem 'dotenv-rails', '~> 2.7.0'
+gem "dotenv-rails", "~> 2.7.0"
 # End UMD Customization
 
 group :development, :test do
@@ -37,12 +37,12 @@ end
 
 # UMD Customization
 group :test do
-  gem 'minitest-reporters', '~> 1.1.8'
-  gem 'minitest-ci', '~> 3.0.3'
+  gem "minitest-reporters", "~> 1.1.8"
+  gem "minitest-ci", "~> 3.0.3"
 
   # Code coverage tools
-  gem 'simplecov', require: false
-  gem 'simplecov-rcov', require: false
+  gem "simplecov", require: false
+  gem "simplecov-rcov", require: false
 end
 
 # The following gems need to be "pinned" to specific versions because they
@@ -53,6 +53,6 @@ end
 #
 # This customization should be re-visited when upgrading to a later version
 # of Ruby.
-gem 'base64', '= 0.1.1'
-gem 'logger', '= 1.5.3'
+gem "base64", "= 0.1.1"
+gem "logger", "= 1.5.3"
 # End UMD Customization

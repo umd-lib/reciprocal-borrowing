@@ -13,16 +13,16 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   # UMD Customization
-  root 'shibboleth_login#home'
+  root "shibboleth_login#home"
 
-  get 'initiate/:org_code' => 'shibboleth_login#initiator', as: :initiator
+  get "initiate/:org_code" => "shibboleth_login#initiator", as: :initiator
 
-  get 'attributes' => 'shibboleth_login#callback'
+  get "attributes" => "shibboleth_login#callback"
 
-  get 'hosting' => 'shibboleth_login#hosting'
+  get "hosting" => "shibboleth_login#hosting"
 
   # Reconfigure error routes to point to dynamic error pages
-  match '/404', to: 'errors#not_found', via: :all, as: :not_found
-  match '/500', to: 'errors#internal_server_error', via: :all, as: :server_error
+  match "/404", to: "errors#not_found", via: :all, as: :not_found
+  match "/500", to: "errors#internal_server_error", via: :all, as: :server_error
   # End UMD Customization
 end

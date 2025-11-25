@@ -13,7 +13,7 @@ module UmdLibEnvironmentBannerHelper
     # module is called.
     unless @@banner_initialized
       @@banner_initialized = true
-      return if ENV['ENVIRONMENT_BANNER_ENABLED'] == 'false'
+      return if ENV["ENVIRONMENT_BANNER_ENABLED"] == "false"
 
       # The EnvVarsEnvironmentBanner banner is used, if enabled, otherwise
       # defaults to the HostEnvironmentBanner implementation
@@ -27,7 +27,7 @@ module UmdLibEnvironmentBannerHelper
         css_options = @@banner.css_options
 
         # Sort to get consistent ordering of keys
-        css_string = css_options.sort.to_h.map { |key, value| "#{key}='#{value}'" }.join(' ')
+        css_string = css_options.sort.to_h.map { |key, value| "#{key}='#{value}'" }.join(" ")
         banner_text = @@banner.text
         @@banner_html = "<div #{css_string}>#{banner_text}</div>".html_safe # rubocop:disable Rails/OutputSafety
         return @@banner_html
@@ -60,7 +60,7 @@ module UmdLibEnvironmentBannerHelper
 
     return unless @@banner&.enabled?
 
-    'extra-padding-top'
+    "extra-padding-top"
   end
 
   # Banner implementation classes -- these are not intended to be called
@@ -83,8 +83,8 @@ module UmdLibEnvironmentBannerHelper
     #
     # This method may return nil, if there is no ENVIRONMENT_BANNER
     def banner_text
-      banner_text = ENV.key?('ENVIRONMENT_BANNER') ? ENV['ENVIRONMENT_BANNER'] : ''
-      ENV['ENVIRONMENT_BANNER'].freeze unless banner_text.empty?
+      banner_text = ENV.key?("ENVIRONMENT_BANNER") ? ENV["ENVIRONMENT_BANNER"] : ""
+      ENV["ENVIRONMENT_BANNER"].freeze unless banner_text.empty?
     end
 
     # Returns the CSS options to use with the environment banner.
@@ -93,10 +93,10 @@ module UmdLibEnvironmentBannerHelper
     # ENVIRONMENT_BANNER_FOREGROUND properties, if provided.
     def banner_css_options # rubocop:disable Metrics/MethodLength
       css_options = {}
-      css_style = ''
+      css_style = ""
 
-      background_color = ENV.key?('ENVIRONMENT_BANNER_BACKGROUND') ? ENV['ENVIRONMENT_BANNER_BACKGROUND'] : ''
-      foreground_color = ENV.key?('ENVIRONMENT_BANNER_FOREGROUND') ? ENV['ENVIRONMENT_BANNER_FOREGROUND'] : ''
+      background_color = ENV.key?("ENVIRONMENT_BANNER_BACKGROUND") ? ENV["ENVIRONMENT_BANNER_BACKGROUND"] : ""
+      foreground_color = ENV.key?("ENVIRONMENT_BANNER_FOREGROUND") ? ENV["ENVIRONMENT_BANNER_FOREGROUND"] : ""
 
       css_style = "background-color: #{background_color};" unless background_color.empty?
 
@@ -107,7 +107,7 @@ module UmdLibEnvironmentBannerHelper
 
       css_options[:style] = css_style unless css_style.empty?
 
-      css_options[:class] = 'environment-banner'
+      css_options[:class] = "environment-banner"
       css_options
     end
 
@@ -115,7 +115,7 @@ module UmdLibEnvironmentBannerHelper
     #
     # text - the text (if any) being displayed in the banner
     def banner_enabled(text)
-      env_var_enabled = ENV.fetch('ENVIRONMENT_BANNER_ENABLED', '')
+      env_var_enabled = ENV.fetch("ENVIRONMENT_BANNER_ENABLED", "")
 
       # Don't display the banner if there is no text
       return false if text.blank?
@@ -124,7 +124,7 @@ module UmdLibEnvironmentBannerHelper
       return true if env_var_enabled.blank?
 
       # Any value other than "true" is false
-      env_var_enabled.strip.downcase == 'true'
+      env_var_enabled.strip.downcase == "true"
     end
 
     def enabled?
@@ -145,7 +145,7 @@ module UmdLibEnvironmentBannerHelper
       @text = "#{environment_name} Environment"
       @css_options = {}
       @css_options[:id] = "environment-#{environment_name.downcase}"
-      @css_options[:class] = 'environment-banner'
+      @css_options[:class] = "environment-banner"
       @enabled = !environment_name.empty?
     end
 
@@ -156,7 +156,7 @@ module UmdLibEnvironmentBannerHelper
     private
 
       def environment_name
-        (Rails.env.development? || Rails.env.vagrant?) ? 'Local' : nil # rubocop:disable Style/TernaryParentheses, Rails/UnknownEnv
+        (Rails.env.development? || Rails.env.vagrant?) ? "Local" : nil # rubocop:disable Style/TernaryParentheses, Rails/UnknownEnv
       end
   end
 end
