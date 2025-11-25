@@ -1,62 +1,50 @@
-source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+source "https://rubygems.org"
 
-ruby '3.2.2'
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
+# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.1"
-# Use Puma as the app server
+# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
+gem "propshaft"
+# Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+# Bundle and process CSS [https://github.com/rails/cssbundling-rails]
+gem "cssbundling-rails"
 
-# Add Bootstrap
-gem 'bootstrap-sass', '3.3.6'
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+# gem "bcrypt", "~> 3.1.7"
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: %i[ windows jruby ]
 
+# UMD Customization
 # dotenv - For storing production configuration parameters
 gem 'dotenv-rails', '~> 2.7.0'
+# End UMD Customization
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+
+  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+  gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 4.1.0'
-  # Display performance information such as SQL time and flame graphs for each request in your browser.
-  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
-  gem 'listen', '~> 3.3'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "web-console"
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
+# UMD Customization
 group :test do
   gem 'minitest-reporters', '~> 1.1.8'
   gem 'minitest-ci', '~> 3.0.3'
 
-  # Code analysis tools
-  gem 'rubocop', '= 1.55.0', require: false
-  gem 'rubocop-rails', '= 2.20.2', require: false
-  gem 'rubocop-checkstyle_formatter', '~> 0.2.0', require: false
+  # Code coverage tools
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
 end
 
-# UMD Customization
 # The following gems need to be "pinned" to specific versions because they
 # are "default" gems provided by Ruby 3.2.2.
 #

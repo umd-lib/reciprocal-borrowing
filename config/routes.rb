@@ -5,6 +5,13 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
+  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+
+  # Defines the root path route ("/")
+  # root "posts#index"
+
   # UMD Customization
   root 'shibboleth_login#home'
 
@@ -17,5 +24,5 @@ Rails.application.routes.draw do
   # Reconfigure error routes to point to dynamic error pages
   match '/404', to: 'errors#not_found', via: :all, as: :not_found
   match '/500', to: 'errors#internal_server_error', via: :all, as: :server_error
-  # End MD Customization
+  # End UMD Customization
 end

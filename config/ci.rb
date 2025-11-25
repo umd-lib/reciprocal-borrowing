@@ -5,6 +5,7 @@ CI.run do
 
   step "Style: Ruby", "bin/rubocop"
 
+  step "Security: Yarn vulnerability audit", "yarn audit"
   step "Security: Importmap vulnerability audit", "bin/importmap audit"
   step "Tests: Rails", "bin/rails test"
 
