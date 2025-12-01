@@ -1,6 +1,5 @@
-# Based on development defaults
-require Rails.root.join("config/environments/development")
-
+# Override settings in the "development.rb" configuration file when
+# running in development mode and using Passenger Phusion.
 Rails.application.configure do
   # Add "borrow-local" (the hostname used by the Docker container) to the list
   # of allowed hosts.
@@ -19,4 +18,15 @@ Rails.application.configure do
   ENV["ENVIRONMENT_BANNER_BACKGROUND"] = "#008080"
   ENV["ENVIRONMENT_BANNER_FOREGROUND"] = "#ffffff"
   ENV["ENVIRONMENT_BANNER"] = "Docker Development Environment"
+
+  # Override the Shibboleth configuration for each of the organizations to
+  # use the local IdP.
+  shibboleth_config = config_for(:shibboleth_config)
+  orgs = shibboleth_config[:organizations]
+  orgs.each do |key, value|
+    value[:idp_entity_id] = "https://shib-idp/idp/shibboleth"
+  end
+
+  shibboleth_config[:organizations] = orgs
+  config.shibboleth_config = shibboleth_config
 end

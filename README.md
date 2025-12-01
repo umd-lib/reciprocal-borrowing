@@ -49,19 +49,25 @@ instructions.
 A basic test plan for verifying application functionality is provided in
 <docs/TestPlan.md>.
 
-### "development_docker" Environment
+## "development_docker_override" Configuration File
 
-An additional "development_docker" environment has been added to the
-Rails standard "development", "test", and "production" environments, to support
-running in the "umd-lib/reciprocal-borrowing-dev-env" Docker stack.
+When running as part of the "umd-lib/reciprocal-borrowing-dev-env" Docker stack,
+an additional "config/environments/development_docker_override.rb" configuration
+file is used to modify the Rails "development" environment for running in the
+Docker environment.
 
-This environment contains:
+This file contains:
 
 * changes to use the "borrow-local" hostname
-* changes to the "shibboleth_config.yml" file so that all organizations use the
-  Shibboleth IdP in the Docker stack
+* updates to the "shibboleth_config" configuration so that all organizations
+  use the Shibboleth IdP in the Docker stack
 * modifications to support running on M-series (Apple Silicon) laptops
 * Values for the environment variables in the ".env" file
+
+The "config/environments/development.rb" includes this file when the
+"PASSENGER_APP_ENV" environment variable from Passenger Phusion is set to
+"development" (which should only occur when the
+"umd-lib/reciprocal-borrowing-dev-env" Docker stack is in use).
 
 ## Application Functionality
 
