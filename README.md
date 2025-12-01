@@ -21,8 +21,20 @@ Reciprocal Borrowing is different from other UMD/SSDR Rails applications:
 3) It does not use the “umd-lib/umd_lib_style”
    (<https://github.com/umd-lib/umd_lib_style>) gem for styling.
 
-4) It uses Sprockets (<https://github.com/rails/sprockets>) for the asset
-   pipeline (as opposed to “webpacker")
+## Application Dependencies
+
+* Ruby 3.2.2
+* Yarn 1.x
+
+## Ruby on Rails Asset Pipeline
+
+This application uses the "importmap-rails", "cssbundling-rails", and
+"propshaft" gems for managing the Rails asset pipeline.
+
+Bootstrap 5 is used as the foundation for the CSS layout. A UMD customization
+file, <app/assets/stylesheets/bootstrap3_defaults.scss>, is provided to make the
+Bootstrap defaults more similar to those of Bootstrap 3 (which was used in the
+original development of the application).
 
 ## Quick Start
 
@@ -31,6 +43,11 @@ Docker-based Shibboleth Identity Provider (IdP) and Shibboleth Service Provider
 (SP) provided in the [umd-lib/reciprocal-borrowing-dev-env][dev-env] GitHub
 repository. Refer to the README.md file in that repository for setup
 instructions.
+
+## Test Plan
+
+A basic test plan for verifying application functionality is provided in
+<docs/TestPlan.md>.
 
 ### "development_docker" Environment
 
