@@ -19,7 +19,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # UMD Customization
 # dotenv - For storing production configuration parameters
-gem "dotenv-rails", "~> 2.7.0"
+gem "dotenv", "~> 3.1.8"
 # End UMD Customization
 
 group :development, :test do
@@ -37,22 +37,10 @@ end
 
 # UMD Customization
 group :test do
-  gem "minitest-reporters", "~> 1.1.8"
-  gem "minitest-ci", "~> 3.0.3"
+  gem "minitest-reporters", "~> 1.7.1"
+  gem "minitest-ci", "~> 3.4.0"
 
   # Code coverage tools
   gem "simplecov", require: false
   gem "simplecov-rcov", require: false
 end
-
-# The following gems need to be "pinned" to specific versions because they
-# are "default" gems provided by Ruby 3.2.2.
-#
-# Without "pinning" these gem versions, Passenger Phusion will complain
-# about a version mismatch.
-#
-# This customization should be re-visited when upgrading to a later version
-# of Ruby.
-gem "base64", "= 0.1.1"
-gem "logger", "= 1.5.3"
-# End UMD Customization
