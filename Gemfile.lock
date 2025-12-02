@@ -129,7 +129,7 @@ GEM
     minitest (5.26.2)
     minitest-ci (3.0.3)
       minitest (~> 5.0, >= 5.0.6)
-    minitest-reporters (1.1.19)
+    minitest-reporters (1.7.1)
       ansi
       builder
       minitest (>= 5.0)
@@ -289,7 +289,7 @@ DEPENDENCIES
   importmap-rails
   logger (= 1.5.3)
   minitest-ci (~> 3.0.3)
-  minitest-reporters (~> 1.1.8)
+  minitest-reporters (~> 1.7.1)
   propshaft
   puma (>= 5.0)
   rails (~> 8.1.1)

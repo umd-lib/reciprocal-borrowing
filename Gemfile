@@ -37,7 +37,7 @@ end
 
 # UMD Customization
 group :test do
-  gem "minitest-reporters", "~> 1.1.8"
+  gem "minitest-reporters", "~> 1.7.1"
   gem "minitest-ci", "~> 3.0.3"
 
   # Code coverage tools
