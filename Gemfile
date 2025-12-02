@@ -54,5 +54,5 @@ end
 # This customization should be re-visited when upgrading to a later version
 # of Ruby.
 gem "base64", "= 0.1.1"
-gem "logger", "= 1.5.3"
+gem "logger", "1.7.0"
 # End UMD Customization
