@@ -1,3 +1,11 @@
+# syntax=docker/dockerfile:1
+# check=error=true
+
+# Note: This Dockerfile is heavily customized, due to the need to integrate
+# the Rails application as an Apache module via Passenger Phusion, in order
+# for the SAML attributes to be passed to the application from the Shibboleth
+# service provider.
+
 # Dockerfile for the generating the Rails application Docker image
 #
 # To build:
@@ -7,7 +15,8 @@
 # where <VERSION> is the Docker image version to create.
 FROM httpd:2.4.57-bullseye
 
-ENV RUBY_VERSION=3.2.2
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
+ARG RUBY_VERSION=3.2.2
 
 # Install Shibboleth SP
 RUN apt-get update && apt-get install -y \
@@ -80,12 +89,11 @@ RUN cd /apps/borrow/reciprocal-borrowing && \
 ENV RAILS_RELATIVE_URL_ROOT=/
 ENV SCRIPT_NAME=/
 
-# The following SECRET_KEY_BASE variable is used so that the
-# "assets:precompile" command will run run without throwing an error.
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 # It will have no effect on the application when it is actually run.
-ENV SECRET_KEY_BASE=IGNORE_ME
+ENV SECRET_KEY_BASEENV SECRET_KEY_BASE=IGNORE_ME=IGNORE_ME
 RUN cd /apps/borrow/reciprocal-borrowing && \
-    bundle exec rake assets:precompile && \
+    SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile && \
     cd ..
 
 # Expose port 3000 to the Docker host, so we can access it

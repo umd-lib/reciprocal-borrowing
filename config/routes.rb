@@ -1,14 +1,28 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root 'shibboleth_login#home'
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  get 'initiate/:org_code' => 'shibboleth_login#initiator', as: :initiator
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
 
-  get 'attributes' => 'shibboleth_login#callback'
+  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
+  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  get 'hosting' => 'shibboleth_login#hosting'
+  # Defines the root path route ("/")
+  # root "posts#index"
+
+  # UMD Customization
+  root "shibboleth_login#home"
+
+  get "initiate/:org_code" => "shibboleth_login#initiator", as: :initiator
+
+  get "attributes" => "shibboleth_login#callback"
+
+  get "hosting" => "shibboleth_login#hosting"
 
   # Reconfigure error routes to point to dynamic error pages
-  match '/404', to: 'errors#not_found', via: :all, as: :not_found
-  match '/500', to: 'errors#internal_server_error', via: :all, as: :server_error
+  match "/404", to: "errors#not_found", via: :all, as: :not_found
+  match "/500", to: "errors#internal_server_error", via: :all, as: :server_error
+  # End UMD Customization
 end

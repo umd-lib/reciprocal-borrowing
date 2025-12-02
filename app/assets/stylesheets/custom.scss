@@ -36,7 +36,10 @@ div#application-header .navbar-brand {
     padding-left: 0;
 }
 .list-horizontal li {
-    display: inline-block;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  text-align: left;
 }
 .list-horizontal li:before {
     content: '\00a0\2022\00a0\00a0';
@@ -44,13 +47,13 @@ div#application-header .navbar-brand {
 }
 .list-horizontal li:first-child {
     width: auto;
+    padding-left: 0;
 }
 .list-horizontal li:first-child:before {
     content: none;
 }
 section#footer-app {
     color: #FFFFFF;
-    padding-bottom: 1rem;
     background-color: #0088ce;
 }
 section#footer-app a {

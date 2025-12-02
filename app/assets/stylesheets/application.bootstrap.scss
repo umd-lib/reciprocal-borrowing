@@ -1,0 +1,8 @@
+@use "../../../node_modules/bootstrap/scss/bootstrap";
+@use "../../../node_modules/bootstrap-icons/font/bootstrap-icons";
+
+// UMD Customization
+@use "bootstrap3_defaults";
+@use "custom";
+@use "umd_lib_environment_banner";
+// End UMD Customization

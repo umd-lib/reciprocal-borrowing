@@ -1,14 +1,14 @@
 class ShibbolethLoginController < ApplicationController
   def home
-    organizations = Rails.configuration.shibboleth_config['organizations']
+    organizations = Rails.configuration.shibboleth_config["organizations"]
     @org_list = organizations.values.sort_by { |v| v[:display_order] }
   end
 
   def initiator # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-    org_code = params['org_code']
-    organizations = Rails.configuration.shibboleth_config['organizations']
-    sp_login_url = ENV['SP_LOGIN_URL'] || '/Shibboleth.sso/Login'
-    callback_url = ENV['CALLBACK_URL'] || '/attributes'
+    org_code = params["org_code"]
+    organizations = Rails.configuration.shibboleth_config["organizations"]
+    sp_login_url = ENV["SP_LOGIN_URL"] || "/Shibboleth.sso/Login"
+    callback_url = ENV["CALLBACK_URL"] || "/attributes"
 
     if organizations.key?(org_code.to_sym)
       org = organizations[org_code.to_sym]
@@ -27,11 +27,11 @@ class ShibbolethLoginController < ApplicationController
     @env = request.env
     @params = request.params
 
-    @name = @env['displayName'] || "#{@env['givenName']} #{@env['sn']}"
-    @name = 'N/A' if @name.strip.empty?
-    @principal_name = @env['eduPersonPrincipalName'] || 'N/A'
-    @identifier = @env['eduPersonTargetedID'] || 'N/A'
-    @entitlement = @env['eduPersonEntitlement'] || 'N/A'
+    @name = @env["displayName"] || "#{@env["givenName"]} #{@env["sn"]}"
+    @name = "N/A" if @name.strip.empty?
+    @principal_name = @env["eduPersonPrincipalName"] || "N/A"
+    @identifier = @env["eduPersonTargetedID"] || "N/A"
+    @entitlement = @env["eduPersonEntitlement"] || "N/A"
 
     @user_authorized = user_authorized?(@entitlement)
   end
@@ -45,7 +45,7 @@ class ShibbolethLoginController < ApplicationController
     #
     # entitlement: the eduPersonEntitlement attribute from Shibboleth
     def user_authorized?(entitlement)
-      expected_entitlement = 'https://borrow.btaa.org/reciprocalborrower'
-      entitlement.split(';').any? { |e| e.downcase == expected_entitlement }
+      expected_entitlement = "https://borrow.btaa.org/reciprocalborrower"
+      entitlement.split(";").any? { |e| e.downcase == expected_entitlement }
     end
 end

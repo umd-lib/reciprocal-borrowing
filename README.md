@@ -21,8 +21,20 @@ Reciprocal Borrowing is different from other UMD/SSDR Rails applications:
 3) It does not use the “umd-lib/umd_lib_style”
    (<https://github.com/umd-lib/umd_lib_style>) gem for styling.
 
-4) It uses Sprockets (<https://github.com/rails/sprockets>) for the asset
-   pipeline (as opposed to “webpacker")
+## Application Dependencies
+
+* Ruby 3.2.2
+* Yarn 1.x
+
+## Ruby on Rails Asset Pipeline
+
+This application uses the "importmap-rails", "cssbundling-rails", and
+"propshaft" gems for managing the Rails asset pipeline.
+
+Bootstrap 5 is used as the foundation for the CSS layout. A UMD customization
+file, <app/assets/stylesheets/bootstrap3_defaults.scss>, is provided to make the
+Bootstrap defaults more similar to those of Bootstrap 3 (which was used in the
+original development of the application).
 
 ## Quick Start
 
@@ -32,19 +44,30 @@ Docker-based Shibboleth Identity Provider (IdP) and Shibboleth Service Provider
 repository. Refer to the README.md file in that repository for setup
 instructions.
 
-### "development_docker" Environment
+## Test Plan
 
-An additional "development_docker" environment has been added to the
-Rails standard "development", "test", and "production" environments, to support
-running in the "umd-lib/reciprocal-borrowing-dev-env" Docker stack.
+A basic test plan for verifying application functionality is provided in
+<docs/TestPlan.md>.
 
-This environment contains:
+## "development_docker_override" Configuration File
+
+When running as part of the "umd-lib/reciprocal-borrowing-dev-env" Docker stack,
+an additional "config/environments/development_docker_override.rb" configuration
+file is used to modify the Rails "development" environment for running in the
+Docker environment.
+
+This file contains:
 
 * changes to use the "borrow-local" hostname
-* changes to the "shibboleth_config.yml" file so that all organizations use the
-  Shibboleth IdP in the Docker stack
+* updates to the "shibboleth_config" configuration so that all organizations
+  use the Shibboleth IdP in the Docker stack
 * modifications to support running on M-series (Apple Silicon) laptops
 * Values for the environment variables in the ".env" file
+
+The "config/environments/development.rb" includes this file when the
+"PASSENGER_APP_ENV" environment variable from Passenger Phusion is set to
+"development" (which should only occur when the
+"umd-lib/reciprocal-borrowing-dev-env" Docker stack is in use).
 
 ## Application Functionality
 

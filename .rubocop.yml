@@ -1,75 +1,8 @@
-require: rubocop-rails
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-# Enables Rails cops
-Rails:
-  Enabled: true
-
-# Exclude auto-generated files
-AllCops:
-  NewCops: enable
-  Exclude:
-    - 'config.ru'
-    - 'Rakefile'
-    - 'bin/**/*'
-    - 'config/**/*'
-    - 'db/**/*'
-    - 'vendor/**/*'
-  TargetRubyVersion: 3.2
-  TargetRailsVersion: 6.1
-
-Layout/IndentationConsistency:
-  EnforcedStyle: indented_internal_methods
-
-# Increase max allowed line length
-Layout/LineLength:
-  Max: 120
-
-Lint/EmptyClass:
-  Exclude:
-    - 'test/test_helper.rb'
-
-Rails/ActionControllerTestCase:
-  # Disabling because ActionControllerTestCases are currently the best fit
-  # for testing the controllers
-  Enabled: false
-
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'test/test_helper.rb'
-
-# The following configuration exclude checks that seem
-# silly, or conflict with the way Rails naturally does
-# things.
-Style/Documentation:
-  Exclude:
-    - 'app/controllers/*_controller.rb'
-    - 'app/helpers/*_helper.rb'
-    - 'test/test_helper.rb'
-    - 'test/controllers/*_controller_test.rb'
-    - 'test/helpers/*_helper_test.rb'
-
-Style/EmptyMethod:
-  EnforcedStyle: expanded
-
-Style/FrozenStringLiteralComment:
-  # Disabling because Ruby 3 did not ultimately chose to make literal
-  # strings frozen by default, and there are no clear plans to do so
-  # in the future.
-  Enabled: false
-
-# Disabling the following as they interfere with the Rails layout of the
-# Gemfile, making changes when doing upgrades less visible
-Bundler/OrderedGems:
-  Enabled: false
-
-Layout/EmptyLines:
-  Exclude:
-    - Gemfile
-
-Style/StringLiterals:
-  Exclude:
-    - Gemfile
-
-Style/SymbolArray:
-  Exclude:
-    - Gemfile
+# Overwrite or add rules to create your own house style
+#
+# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+# Layout/SpaceInsideArrayLiteralBrackets:
+#   Enabled: false

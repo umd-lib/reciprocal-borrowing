@@ -4,6 +4,10 @@
 # The Rails application will need to be restarted to pick up any modifications
 # to this file.
 
+# Note: When running in the "umd-lib/reciprocal-borrowing-dev-env" environment,
+# the Shibboleth IdP is overridden in
+# "config/environments/development_docker_override.rb"
+
 # Production Environment Configuration
 production:
   # The "organizations" map contains information for each organization available
@@ -204,74 +208,6 @@ development:
     wisc:
       <<: *id_wisc
       idp_entity_id: 'https://192.168.33.10/idp/shibboleth'
-
-# development_docker Environment Configuration
-development_docker:
-  organizations:
-    <<: *id_development_organization
-    uchicago:
-      <<: *id_uchicago
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    illinois:
-      <<: *id_illinois
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    iu:
-      <<: *id_iu
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    uiowa:
-      <<: *id_uiowa
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    umd:
-      <<: *id_umd
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    umich:
-      <<: *id_umich
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    msu:
-      <<: *id_msu
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    umn:
-      <<: *id_umn
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    unl:
-      <<: *id_unl
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    northwestern:
-      <<: *id_northwestern
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    osu:
-      <<: *id_osu
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    psu:
-      <<: *id_psu
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    uoregon:
-      <<: *id_uoregon
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    purdue:
-      <<: *id_purdue
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    rutgers:
-      <<: *id_rutgers
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
-
-    wisc:
-      <<: *id_wisc
-      idp_entity_id: 'https://shib-idp/idp/shibboleth'
 
 # Test Environment Configuration
 test:
