@@ -203,7 +203,7 @@ GitHub for information about setting up a MacBook to use the Kubernetes
 5) Create the "docker.lib.umd.edu/reciprocal-borrowing" Docker image:
 
     ```bash
-    $ docker buildx build --no-cache --platform linux/amd64 --push --no-cache \
+    $ docker buildx build --no-cache --platform linux/amd64 --push \
         --builder=kube  -f Dockerfile -t docker.lib.umd.edu/reciprocal-borrowing:$APP_TAG .
     ```
 

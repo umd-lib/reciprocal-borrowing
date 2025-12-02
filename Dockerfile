@@ -64,9 +64,6 @@ RUN addgroup --gid 9999 app && \
 RUN mkdir -p /apps/borrow && \
     chown --recursive app:app /apps
 
-# USER app
-# WORKDIR /apps
-
 ENV RAILS_ENV=production
 
 COPY --chown=app:app Gemfile Gemfile.lock /apps/borrow/reciprocal-borrowing/
@@ -80,18 +77,30 @@ COPY --chown=app:app docker_config/app_start.sh /apps/borrow
 # Create directory to hold the Shibboleth certificates
 RUN mkdir -p /apps/borrow/certs
 
+# Install Node v24.x and Yarn v1.22.x
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
+    apt-get update && \
+    # Install nodejs (v24.x from NodeSource)
+    apt-get install -y nodejs && \
+    # Clean up apt lists to keep image size small
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    # Install a specific version of Yarn globally using npm
+    npm install -g yarn@1.22.22
+
 RUN cd /apps/borrow/reciprocal-borrowing && \
     gem install bundler --version 2.4.17 && \
     bundle config set --local without 'development,test' && \
     bundle config set --local path 'vendor/bundle' && \
     bundle install
 
+RUN  cd /apps/borrow/reciprocal-borrowing && \
+     yarn install
+
 ENV RAILS_RELATIVE_URL_ROOT=/
 ENV SCRIPT_NAME=/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-# It will have no effect on the application when it is actually run.
-ENV SECRET_KEY_BASEENV SECRET_KEY_BASE=IGNORE_ME=IGNORE_ME
 RUN cd /apps/borrow/reciprocal-borrowing && \
     SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile && \
     cd ..
