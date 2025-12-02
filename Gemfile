@@ -38,7 +38,7 @@ end
 # UMD Customization
 group :test do
   gem "minitest-reporters", "~> 1.1.8"
-  gem "minitest-ci", "~> 3.0.3"
+  gem "minitest-ci", "~> 3.4.0"
 
   # Code coverage tools
   gem "simplecov", require: false
