@@ -44,3 +44,14 @@ group :test do
   gem "simplecov", require: false
   gem "simplecov-rcov", require: false
 end
+
+
+# The following gems need to be pinned because otherwise a version
+# mismatch will occur when using Passenger Phusion that wil prevent it
+# from running.
+#
+# This customization should be re-visited when upgrading to a later version
+# of Ruby, or Passenger Phuson.
+gem "base64", "= 0.2.0"
+gem "stringio", "= 3.1.2"
+# End UMD Customization
