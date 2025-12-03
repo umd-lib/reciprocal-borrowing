@@ -23,7 +23,7 @@ Reciprocal Borrowing is different from other UMD/SSDR Rails applications:
 
 ## Application Dependencies
 
-* Ruby 3.2.2
+* Ruby 3.4.7
 * Yarn 1.x
 
 ## Ruby on Rails Asset Pipeline

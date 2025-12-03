@@ -16,7 +16,7 @@
 FROM httpd:2.4.57-bullseye
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.2.2
+ARG RUBY_VERSION=3.4.7
 
 # Install Shibboleth SP
 RUN apt-get update && apt-get install -y \
@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 RUN cd ~ && \
-   wget https://cache.ruby-lang.org/pub/ruby/3.2/ruby-${RUBY_VERSION}.tar.gz && \
+   wget https://cache.ruby-lang.org/pub/ruby/3.4/ruby-${RUBY_VERSION}.tar.gz && \
    tar -xvzf ruby-${RUBY_VERSION}.tar.gz && \
    cd ruby-${RUBY_VERSION} && \
    ./configure && \
