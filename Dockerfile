@@ -77,8 +77,12 @@ COPY --chown=app:app docker_config/app_start.sh /apps/borrow
 # Create directory to hold the Shibboleth certificates
 RUN mkdir -p /apps/borrow/certs
 
-# Install Node v24.x and Yarn v1.22.x
-RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
+ARG NODE_VERSION=24
+ARG YARN_VERSION=1.22.22
+ARG BUNDLER_VERSION=2.4.17
+
+# Install Node and Yarn
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
     apt-get update && \
     # Install nodejs (v24.x from NodeSource)
     apt-get install -y nodejs && \
@@ -86,10 +90,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     # Install a specific version of Yarn globally using npm
-    npm install -g yarn@1.22.22
+    npm install -g yarn@${YARN_VERSION}
 
 RUN cd /apps/borrow/reciprocal-borrowing && \
-    gem install bundler --version 2.4.17 && \
+    gem install bundler --version ${BUNDLER_VERSION} && \
     bundle config set --local without 'development,test' && \
     bundle config set --local path 'vendor/bundle' && \
     bundle install
