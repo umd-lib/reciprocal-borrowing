@@ -250,7 +250,7 @@ GEM
     simplecov-rcov (0.3.7)
       simplecov (>= 0.4.1)
     simplecov_json_formatter (0.1.4)
-    stringio (3.1.2)
+    stringio (3.1.9)
     thor (1.4.0)
     timeout (0.4.4)
     tsort (0.2.0)
@@ -293,7 +293,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   simplecov
   simplecov-rcov
-  stringio (= 3.1.2)
+  stringio (= 3.1.9)
   tzinfo-data
   web-console
 
