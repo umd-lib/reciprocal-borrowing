@@ -45,7 +45,7 @@ RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl && \
-    curl https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key.txt | gpg --dearmor | tee /etc/apt/trusted.gpg.d/phusion.gpg >/dev/null && \
+    curl https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key-2025.txt | gpg --dearmor | tee /etc/apt/trusted.gpg.d/phusion.gpg >/dev/null && \
     sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger bullseye main > /etc/apt/sources.list.d/passenger.list' && \
     apt-get clean
 
@@ -54,6 +54,7 @@ RUN apt-get install -y libapache2-mod-passenger
 RUN gem install --no-document passenger
 
 RUN a2enmod passenger
+RUN a2enmod remoteip
 
 # Create a user for the web app.
 RUN addgroup --gid 9999 app && \
