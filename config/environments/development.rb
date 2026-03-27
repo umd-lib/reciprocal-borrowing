@@ -50,9 +50,11 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
 end
 
+# UMD Customization
 # When running the application using the "umd-lib/reciprocal-borrowing-dev-env"
 # repository, override the "development" configuration by including the values
 # in the "development_docker_override.rb" file.
 if ENV["PASSENGER_APP_ENV"] == "development"
   require Rails.root.join("config/environments/development_docker_override")
 end
+# End UMD Customization
