@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.1"
+gem "rails", "~> 8.1.3"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use the Puma web server [https://github.com/puma/puma]
@@ -44,7 +44,6 @@ group :test do
   gem "simplecov", require: false
   gem "simplecov-rcov", require: false
 end
-
 
 # The following gems need to be pinned because otherwise a version
 # mismatch will occur when using Passenger Phusion that wil prevent it
