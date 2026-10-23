@@ -13,7 +13,7 @@
 # docker build -t docker.lib.umd.edu/reciprocal-borrowing:<VERSION> -f Dockerfile .
 #
 # where <VERSION> is the Docker image version to create.
-FROM httpd:2.4.57-bullseye
+FROM httpd:2.4.69-trixie
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.4.7
