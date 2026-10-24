@@ -19,7 +19,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # UMD Customization
 # dotenv - For storing production configuration parameters
-gem "dotenv", "~> 3.1.8"
+gem "dotenv", "~> 3.2.0"
 # End UMD Customization
 
 group :development, :test do
